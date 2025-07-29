@@ -18,7 +18,6 @@ const services = [
     domain: "translate.google.com",
     alias: "Google-Translate",
   },
-  { name: "DeepL", tld: "com" },
 
   // Media & Content
   { name: "bilibili", tld: "com" },
