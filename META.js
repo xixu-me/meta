@@ -36,6 +36,7 @@ const services = [
   { name: "OKX", tld: "com" },
 
   // Technology Companies
+  { name: "Apple", tld: "com" },
   { name: "Google", tld: "google", sld: "about" },
   { name: "Microsoft", tld: "com" },
 
