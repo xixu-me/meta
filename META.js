@@ -12,13 +12,6 @@ const services = [
   { name: "Perplexity", tld: "ai" },
   { name: "xAI", tld: "ai", sld: "x" },
 
-  // Tools & Utilities
-  {
-    name: "Translate",
-    domain: "translate.google.com",
-    alias: "Google-Translate",
-  },
-
   // Media & Content
   { name: "bilibili", tld: "com" },
   { name: "Medium", tld: "com" },
