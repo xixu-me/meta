@@ -287,7 +287,7 @@ const locationPolicyProxyGroupDefaults = {
 };
 
 const SERVICE_ICON_SET_URL =
-  "https://raw.githubusercontent.com/xixu-me/favicons/refs/heads/assets/";
+  "https://cdn.jsdelivr.net/gh/xixu-me/favicons@assets/favicons/";
 
 function getServiceIcon(service) {
   if (service.icon) return service.icon;
