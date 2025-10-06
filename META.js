@@ -35,7 +35,7 @@ const services = [
 
   // Infrastructure
   { name: "Speedtest", tld: "net" },
-  { name: "Xget", domain: "xget.xi-xu.me" },
+  { name: "Xget", domain: "xuc.xi-xu.me" },
   { name: "Cloudflare", tld: "com" },
 ];
 
