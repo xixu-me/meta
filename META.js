@@ -16,11 +16,12 @@ const services = [
   { name: "bilibili", tld: "com" },
   { name: "Medium", tld: "com" },
   { name: "Netflix", tld: "com" },
+  { name: "Sora", tld: "com" },
   { name: "Spotify", tld: "com" },
   { name: "YouTube", tld: "com" },
 
   // Social Media & Communication
-  { name: "rednote", domain: "xiaohongshu.com", alias: "Xiaohongshu" },
+  { name: "rednote", tld: "com", sld: "xiaohongshu", alias: "Xiaohongshu" },
   { name: "Telegram", tld: "org" },
   { name: "X", tld: "com" },
 
@@ -141,7 +142,7 @@ const locations = [
 // ####################################### DO NOT MODIFY THE CODE BELOW UNLESS YOU KNOW WHAT YOU ARE DOING #######################################
 
 function extractFavicon(domain) {
-  return `https://t1.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=https://${domain}&size=256`;
+  return `https://t1.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=https://${domain}&size=128`;
 }
 
 // General Configuration
