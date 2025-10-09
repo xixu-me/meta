@@ -4,6 +4,14 @@
 
 // Routing rules are matched in order from top to bottom, with the rule at the top of the list taking precedence over the rules below it.
 const services = [
+  // Media & Content
+  { name: "bilibili", tld: "com" },
+  { name: "Medium", tld: "com" },
+  { name: "Netflix", tld: "com" },
+  { name: "Sora", domain: "sora.chatgpt.com" },
+  { name: "Spotify", tld: "com" },
+  { name: "YouTube", tld: "com" },
+
   // AI/LLM Services
   { name: "Anthropic", tld: "com" },
   { name: "Gemini", tld: "google", alias: "Google-Gemini" },
@@ -11,14 +19,6 @@ const services = [
   { name: "OpenAI", tld: "com" },
   { name: "Perplexity", tld: "ai" },
   { name: "xAI", tld: "ai", sld: "x" },
-
-  // Media & Content
-  { name: "bilibili", tld: "com" },
-  { name: "Medium", tld: "com" },
-  { name: "Netflix", tld: "com" },
-  { name: "Sora", tld: "com" },
-  { name: "Spotify", tld: "com" },
-  { name: "YouTube", tld: "com" },
 
   // Social Media & Communication
   { name: "rednote", tld: "com", sld: "xiaohongshu", alias: "Xiaohongshu" },
