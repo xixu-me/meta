@@ -27,6 +27,7 @@ const services = [
 
   // Financial Services
   { name: "Binance", tld: "com" },
+  { name: "Bybit", tld: "com" },
   { name: "OKX", tld: "com" },
 
   // Technology Companies
