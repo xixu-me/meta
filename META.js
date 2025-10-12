@@ -2,6 +2,9 @@
 
 // ################################################### this section can be flexibly customized ###################################################
 
+// Number of STATIC proxy groups (for IP-sensitive services)
+const STATIC_PROXY_COUNT = 3;
+
 // Routing rules are matched in order from top to bottom, with the rule at the top of the list taking precedence over the rules below it.
 const services = [
   // Media & Content
@@ -275,10 +278,23 @@ const proxyGroupDefaults = {
   "max-failed-times": 5,
 };
 
+// Generate STATIC proxy group names
+function generateStaticProxyNames() {
+  if (STATIC_PROXY_COUNT === 1) {
+    return ["STATIC"];
+  }
+  return Array.from(
+    { length: STATIC_PROXY_COUNT },
+    (_, i) => `STATIC-${i + 1}`
+  );
+}
+
+const staticProxyNames = generateStaticProxyNames();
+
 const serviceProxyGroupProxies = [
   "PROXY",
   "AUTO",
-  "STATIC",
+  ...staticProxyNames,
   "DIRECT",
   "Mainland China 🇨🇳",
   ...locations.map(({ name }) => name),
@@ -380,6 +396,17 @@ function generateLocationSelectProxyGroups() {
 const BASE_ICON_SET_URL =
   "https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/";
 
+// Generate STATIC proxy groups
+function generateStaticProxyGroups(defaultConfig) {
+  return staticProxyNames.map((name, index) => ({
+    ...defaultConfig,
+    name,
+    type: "select",
+    "include-all": true,
+    icon: `${BASE_ICON_SET_URL}Static.png`,
+  }));
+}
+
 const proxyGroups = [
   {
     ...proxyGroupDefaults,
@@ -387,7 +414,7 @@ const proxyGroups = [
     type: "select",
     proxies: [
       "AUTO",
-      "STATIC",
+      ...staticProxyNames,
       "Mainland China 🇨🇳",
       ...locations.map(({ name }) => name),
     ],
@@ -402,13 +429,7 @@ const proxyGroups = [
     icon: `${BASE_ICON_SET_URL}Auto.png`,
     hidden: true,
   },
-  {
-    ...proxyGroupDefaults,
-    name: "STATIC",
-    type: "select",
-    "include-all": true,
-    icon: `${BASE_ICON_SET_URL}Static.png`,
-  },
+  ...generateStaticProxyGroups(proxyGroupDefaults),
   ...generateServiceProxyGroups(services, proxyGroupDefaults),
   {
     ...proxyGroupDefaults,
@@ -421,7 +442,7 @@ const proxyGroups = [
     ...proxyGroupDefaults,
     name: "Advertising",
     type: "select",
-    proxies: ["REJECT", "DIRECT", "STATIC"],
+    proxies: ["REJECT", "DIRECT", ...staticProxyNames],
     icon: `${BASE_ICON_SET_URL}Advertising.png`,
   },
   {
