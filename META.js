@@ -21,6 +21,7 @@ const services = [
   { name: "xAI", tld: "ai", sld: "x" },
 
   // Social Media & Communication
+  { name: "Mastodon", tld: "social" },
   { name: "rednote", tld: "com", sld: "xiaohongshu", alias: "Xiaohongshu" },
   { name: "Telegram", tld: "org" },
   { name: "X", tld: "com" },
@@ -29,6 +30,7 @@ const services = [
   { name: "Binance", tld: "com" },
   { name: "Bybit", tld: "com" },
   { name: "OKX", tld: "com" },
+  { name: "Pi", tld: "com", sld: "minepi" },
 
   // Technology Companies
   { name: "Apple", tld: "com" },
