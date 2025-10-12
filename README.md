@@ -122,6 +122,6 @@ Traffic routing rules are prioritized from top to bottom:
 
 ## License
 
-Copyright &copy; [Xi Xu](https://xi-xu.me). All rights reserved.
+Copyright &copy; [Xi Xu](https://xi-xu.me)
 
 Licensed under the [GPL-3.0](LICENSE) license.  
