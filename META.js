@@ -503,6 +503,7 @@ function generateServiceRules(services) {
 
 const rules = [
   "RULE-SET,applications,DIRECT",
+  "RULE-SET,win-phonelink,DIRECT",
   "RULE-SET,lancidr,DIRECT,no-resolve",
   "RULE-SET,private,DIRECT",
   ...generateServiceRules(services),
@@ -560,6 +561,13 @@ const ruleProviders = {
     behavior: "classical",
     url: "https://cdn.jsdelivr.net/gh/xixu-me/RFM@basic/applications.yaml",
     path: "./rulesets/applications.yaml",
+  },
+  "win-phonelink": {
+    ...ruleProviderDefaults,
+    format: "yaml",
+    behavior: "classical",
+    url: "https://cdn.jsdelivr.net/gh/xixu-me/RFM@fixed/win-phonelink.yaml",
+    path: "./rulesets/win-phonelink.yaml",
   },
   lancidr: {
     ...ruleProviderDefaults,
