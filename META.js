@@ -25,7 +25,7 @@ const services = [
 
   // Social Media & Communication
   { name: "Mastodon", tld: "social" },
-  { name: "rednote", tld: "com", sld: "xiaohongshu", alias: "Xiaohongshu" },
+  { name: "rednote", domain: "xiaohongshu.com", alias: "Xiaohongshu" },
   { name: "Telegram", tld: "org" },
   { name: "X", tld: "com" },
 
