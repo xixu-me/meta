@@ -293,8 +293,8 @@ const staticProxyNames = generateStaticProxyNames();
 
 const serviceProxyGroupProxies = [
   "PROXY",
-  "AUTO",
   ...staticProxyNames,
+  "AUTO",
   "DIRECT",
   "Mainland China 🇨🇳",
   ...locations.map(({ name }) => name),
@@ -384,11 +384,11 @@ function generateLocationSelectProxyGroups() {
     type: "select",
     icon,
     proxies: [
-      `AUTO ${name.split(" ").pop()}`,
-      `FALLBACK ${name.split(" ").pop()}`,
       `LOAD BALANCING (consistent hashing) ${name.split(" ").pop()}`,
       `LOAD BALANCING (round-robin) ${name.split(" ").pop()}`,
       `LOAD BALANCING (sticky sessions) ${name.split(" ").pop()}`,
+      `FALLBACK ${name.split(" ").pop()}`,
+      `AUTO ${name.split(" ").pop()}`,
     ],
   }));
 }
@@ -413,8 +413,8 @@ const proxyGroups = [
     name: "PROXY",
     type: "select",
     proxies: [
-      "AUTO",
       ...staticProxyNames,
+      "AUTO",
       "Mainland China 🇨🇳",
       ...locations.map(({ name }) => name),
     ],
