@@ -82,12 +82,12 @@ const locations = [
   {
     name: "Iraq 🇮🇶",
     icon: `${LOCATION_ICON_SET_URL}iraq`,
-    filter: "(?i)\u4f0a\u62c9\u514b|Iraq|IRQ|IQ|iraq|iq|🇮🇶",
+    filter: "(?i)\u4f0a\u62c9\u514b|Iraq|IQ|iraq|iq|🇮🇶",
   },
   {
     name: "Japan 🇯🇵",
     icon: `${LOCATION_ICON_SET_URL}japan`,
-    filter: "(?i)\u65e5\u672c|Japan|japan|ja|🇯🇵",
+    filter: "(?i)\u65e5\u672c|Japan|JP|japan|jp|🇯🇵",
   },
   {
     name: "Korea 🇰🇷",
