@@ -433,6 +433,19 @@ const proxyGroups = [
   ...generateServiceProxyGroups(services, proxyGroupDefaults),
   {
     ...proxyGroupDefaults,
+    name: "Domestic",
+    type: "select",
+    proxies: [
+      "Chinese Mainland 🇨🇳",
+      "PROXY",
+      ...staticProxyNames,
+      "AUTO",
+      ...locations.map(({ name }) => name),
+    ],
+    icon: `${BASE_ICON_SET_URL}Domestic.png`,
+  },
+  {
+    ...proxyGroupDefaults,
     name: "Others",
     type: "select",
     proxies: [...serviceProxyGroupProxies],
@@ -509,13 +522,13 @@ const rules = [
   ...generateServiceRules(services),
   "RULE-SET,reject,Advertising",
   "RULE-SET,win-spy,Advertising",
-  "RULE-SET,direct,Chinese Mainland 🇨🇳",
+  "RULE-SET,direct,Domestic",
   "RULE-SET,proxy,PROXY",
   "RULE-SET,telegramcidr,Telegram",
   "RULE-SET,xcidr,X",
   "RULE-SET,googlecidr,Google",
   "RULE-SET,cloudflarecidr,Cloudflare",
-  "RULE-SET,cncidr,Chinese Mainland 🇨🇳",
+  "RULE-SET,cncidr,Domestic",
   "MATCH,Others",
 ];
 
