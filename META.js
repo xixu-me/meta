@@ -296,7 +296,7 @@ const serviceProxyGroupProxies = [
   ...staticProxyNames,
   "AUTO",
   "DIRECT",
-  "Mainland China 🇨🇳",
+  "Chinese Mainland 🇨🇳",
   ...locations.map(({ name }) => name),
 ];
 
@@ -415,7 +415,7 @@ const proxyGroups = [
     proxies: [
       ...staticProxyNames,
       "AUTO",
-      "Mainland China 🇨🇳",
+      "Chinese Mainland 🇨🇳",
       ...locations.map(({ name }) => name),
     ],
     icon: `${BASE_ICON_SET_URL}Proxy.png`,
@@ -447,7 +447,7 @@ const proxyGroups = [
   },
   {
     ...locationPolicyProxyGroupDefaults,
-    name: "Mainland China 🇨🇳",
+    name: "Chinese Mainland 🇨🇳",
     type: "select",
     icon: `${LOCATION_ICON_SET_URL}china`,
     proxies: ["DIRECT"],
@@ -509,13 +509,13 @@ const rules = [
   ...generateServiceRules(services),
   "RULE-SET,reject,Advertising",
   "RULE-SET,win-spy,Advertising",
-  "RULE-SET,direct,Mainland China 🇨🇳",
+  "RULE-SET,direct,Chinese Mainland 🇨🇳",
   "RULE-SET,proxy,PROXY",
   "RULE-SET,telegramcidr,Telegram",
   "RULE-SET,xcidr,X",
   "RULE-SET,googlecidr,Google",
   "RULE-SET,cloudflarecidr,Cloudflare",
-  "RULE-SET,cncidr,Mainland China 🇨🇳",
+  "RULE-SET,cncidr,Chinese Mainland 🇨🇳",
   "MATCH,Others",
 ];
 
