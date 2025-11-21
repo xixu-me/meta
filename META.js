@@ -179,7 +179,6 @@ const chineseNameservers = [
 ];
 
 const internationalNameservers = [
-  "quic://unfiltered.adguard-dns.com",
   "https://cloudflare-dns.com/dns-query",
   "https://dns.google/dns-query",
   // "https://dns.mullvad.net/dns-query",
