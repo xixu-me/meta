@@ -154,12 +154,12 @@ function extractFavicon(domain) {
 // General Configuration
 
 const generalConfig = {
+  "mixed-port": 7890,
   "allow-lan": false,
   mode: "rule",
   "log-level": "info",
   ipv6: true,
   "find-process-mode": "strict",
-  "external-controller": "",
   profile: {
     "store-selected": true,
     "store-fake-ip": true,
