@@ -174,42 +174,26 @@ const generalConfig = {
 // DNS
 
 const chineseNameservers = [
-  "https://doh.pub/dns-query",
   "https://dns.alidns.com/dns-query",
+  "https://doh.pub/dns-query",
 ];
 
 const internationalNameservers = [
-  "quic://unfiltered.adguard-dns.com:784",
-  "https://dns.google/dns-query",
-  "https://doh.dns.sb/dns-query",
-  "https://dns.quad9.net/dns-query",
-  "https://doh.opendns.com/dns-query",
+  "quic://unfiltered.adguard-dns.com",
   "https://dns.mullvad.net/dns-query",
-  "https://doh.umbrella.com/dns-query",
   "https://wikimedia-dns.org/dns-query",
-  "https://doh.dns.apple.com/dns-query",
+  "https://doh.dns.sb/dns-query",
   "https://cloudflare-dns.com/dns-query",
-  "https://common.dot.dns.yandex.net/dns-query",
-  "https://unfiltered.adguard-dns.com/dns-query",
-];
-
-const adguardDefaultNameservers = [
-  "quic://dns.adguard-dns.com:784",
-  "https://dns.adguard-dns.com/dns-query",
-];
-
-const adguardFamilyNameservers = [
-  "quic://family.adguard-dns.com:784",
-  "https://family.adguard-dns.com/dns-query",
+  "https://dns.google/dns-query",
 ];
 
 const dns = {
   enable: true,
+  "cache-algorithm": "arc",
   "prefer-h3": false,
   "use-hosts": true,
   "use-system-hosts": false,
   "respect-rules": true,
-  listen: "0.0.0.0:1053",
   ipv6: true,
   "enhanced-mode": "fake-ip",
   "fake-ip-range": "198.18.0.1/16",
@@ -220,30 +204,13 @@ const dns = {
     "rule-set:private",
     "rule-set:connectivity-check",
   ],
-  "default-nameserver": [
-    "119.29.29.29",
-    "223.5.5.5",
-    "223.6.6.6",
-    "8.8.8.8",
-    "8.8.4.4",
-    "1.1.1.1",
-    "1.0.0.1",
-    "9.9.9.9",
-    "149.112.112.112",
-    "208.67.222.222",
-    "208.67.220.220",
-  ],
+  "default-nameserver": ["223.5.5.5", "223.6.6.6", "119.29.29.29"],
   "proxy-server-nameserver": chineseNameservers,
   "nameserver-policy": {
     "rule-set:private,direct,geolocation-cn": chineseNameservers,
     "rule-set:proxy": internationalNameservers,
   },
-  nameserver: [
-    ...chineseNameservers,
-    ...internationalNameservers,
-    // ...adguardDefaultNameservers,
-    // ...adguardFamilyNameservers,
-  ],
+  nameserver: internationalNameservers,
 };
 
 // Hosts
