@@ -180,11 +180,11 @@ const chineseNameservers = [
 
 const internationalNameservers = [
   "quic://unfiltered.adguard-dns.com",
-  "https://dns.mullvad.net/dns-query",
-  "https://wikimedia-dns.org/dns-query",
-  "https://doh.dns.sb/dns-query",
   "https://cloudflare-dns.com/dns-query",
   "https://dns.google/dns-query",
+  // "https://dns.mullvad.net/dns-query",
+  // "https://wikimedia-dns.org/dns-query",
+  // "https://doh.dns.sb/dns-query",
 ];
 
 const dns = {
@@ -197,6 +197,7 @@ const dns = {
   ipv6: true,
   "enhanced-mode": "fake-ip",
   "fake-ip-range": "198.18.0.1/16",
+  "fake-ip-range6": "fc00::/18",
   "fake-ip-filter-mode": "blacklist",
   "fake-ip-filter": [
     "rule-set:fake-ip-filter",
@@ -204,7 +205,11 @@ const dns = {
     "rule-set:private",
     "rule-set:connectivity-check",
   ],
-  "default-nameserver": ["223.5.5.5", "223.6.6.6", "119.29.29.29"],
+  "default-nameserver": [
+    "tls://223.5.5.5",
+    "tls://223.6.6.6",
+    "tls://119.29.29.29",
+  ],
   "proxy-server-nameserver": chineseNameservers,
   "nameserver-policy": {
     "rule-set:private,direct,geolocation-cn": chineseNameservers,
