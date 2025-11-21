@@ -50,12 +50,6 @@ const LOCATION_ICON_SET_URL = "https://img.icons8.com/color/144/";
 
 const locations = [
   {
-    name: "Chinese Mainland 🇨🇳",
-    icon: `${LOCATION_ICON_SET_URL}china`,
-    filter:
-      "(?i)\u5927\u9646|\u4e2d\u56fd|\u7535\u4fe1|\u79fb\u52a8|\u8054\u901a|Mainland|China|CN|mainland|china|cn|🇨🇳",
-  },
-  {
     name: "Argentina 🇦🇷",
     icon: `${LOCATION_ICON_SET_URL}argentina`,
     filter: "(?i)\u963f\u6839\u5ef7|Argentina|ARG|AR|argentina|arg|ar|🇦🇷",
@@ -272,6 +266,7 @@ const serviceProxyGroupProxies = [
   ...staticProxyNames,
   "AUTO",
   "DIRECT",
+  "Chinese Mainland 🇨🇳",
   ...locations.map(({ name }) => name),
 ];
 
@@ -390,6 +385,8 @@ const proxyGroups = [
     proxies: [
       ...staticProxyNames,
       "AUTO",
+      "DIRECT",
+      "Chinese Mainland 🇨🇳",
       ...locations.map(({ name }) => name),
     ],
     icon: `${BASE_ICON_SET_URL}Proxy.png`,
@@ -411,10 +408,11 @@ const proxyGroups = [
     type: "select",
     proxies: [
       "DIRECT",
-      ...locations.map(({ name }) => name),
       "PROXY",
       ...staticProxyNames,
       "AUTO",
+      "Chinese Mainland 🇨🇳",
+      ...locations.map(({ name }) => name),
     ],
     icon: `${BASE_ICON_SET_URL}Domestic.png`,
   },
@@ -431,6 +429,16 @@ const proxyGroups = [
     type: "select",
     proxies: ["REJECT", "DIRECT", ...staticProxyNames],
     icon: `${BASE_ICON_SET_URL}Advertising.png`,
+  },
+  {
+    ...locationPolicyProxyGroupDefaults,
+    name: "Chinese Mainland 🇨🇳",
+    type: "select",
+    icon: `${LOCATION_ICON_SET_URL}china`,
+    proxies: ["REJECT"],
+    "include-all": true,
+    filter:
+      "(?i)\u5927\u9646|\u4e2d\u56fd|\u7535\u4fe1|\u79fb\u52a8|\u8054\u901a|Mainland|China|CN|mainland|china|cn|🇨🇳",
   },
   ...generateLocationPolicyProxyGroups(
     locations,
