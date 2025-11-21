@@ -82,7 +82,6 @@ jobs:
           cat > publish/META.yaml << 'EOL'
           proxy-providers-defaults: &ppd
             type: http
-            proxy: PROXY
             interval: 86400
             health-check:
               enable: true
