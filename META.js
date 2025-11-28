@@ -27,7 +27,7 @@ const services = [
   { name: "Mastodon", tld: "social" },
   { name: "rednote", domain: "xiaohongshu.com", alias: "Xiaohongshu" },
   { name: "Telegram", tld: "org" },
-  { name: "Truth Social", tld: "com", sld: "truthsocial" },
+  { name: "Truth Social", tld: "com", sld: "truthsocial", alias: "TruthSocial" },
   { name: "X", tld: "com" },
 
   // Financial Services
