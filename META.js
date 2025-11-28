@@ -27,7 +27,12 @@ const services = [
   { name: "Mastodon", tld: "social" },
   { name: "rednote", domain: "xiaohongshu.com", alias: "Xiaohongshu" },
   { name: "Telegram", tld: "org" },
-  { name: "Truth Social", tld: "com", sld: "truthsocial", alias: "TruthSocial" },
+  {
+    name: "Truth Social",
+    tld: "com",
+    sld: "truthsocial",
+    alias: "TruthSocial",
+  },
   { name: "X", tld: "com" },
 
   // Financial Services
@@ -515,12 +520,13 @@ const ruleProviderDefaults = {
 function generateServiceRuleProviders(services, defaultConfig) {
   return services.reduce((acc, { name, alias }) => {
     const ruleName = alias || name;
+    const fileName = name.toLowerCase().replace(/\s+/g, "");
     acc[name.toLowerCase()] = {
       ...defaultConfig,
       format: "mrs",
       behavior: "domain",
       url: `https://cdn.jsdelivr.net/gh/xixu-me/RFM@universal/${ruleName.toLowerCase()}.mrs`,
-      path: `./rulesets/${name.toLowerCase()}.mrs`,
+      path: `./rulesets/${fileName}.mrs`,
     };
     return acc;
   }, {});
