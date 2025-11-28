@@ -489,7 +489,9 @@ const proxyGroups = [
 // Routing Rules
 
 function generateServiceRules(services) {
-  return services.map(({ name }) => `RULE-SET,${name.toLowerCase()},${name}`);
+  return services.map(
+    ({ name }) => `RULE-SET,${name.toLowerCase().replace(/\s+/g, "")},${name}`
+  );
 }
 
 const rules = [
