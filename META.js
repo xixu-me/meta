@@ -521,14 +521,14 @@ const ruleProviderDefaults = {
 
 function generateServiceRuleProviders(services, defaultConfig) {
   return services.reduce((acc, { name, alias }) => {
-    const ruleName = alias || name;
-    const fileName = name.toLowerCase().replace(/\s+/g, "");
-    acc[name.toLowerCase()] = {
+    const fileName = (alias || name).toLowerCase();
+    const ruleName = name.toLowerCase().replace(/\s+/g, "");
+    acc[ruleName] = {
       ...defaultConfig,
       format: "mrs",
       behavior: "domain",
-      url: `https://cdn.jsdelivr.net/gh/xixu-me/RFM@universal/${ruleName.toLowerCase()}.mrs`,
-      path: `./rulesets/${fileName}.mrs`,
+      url: `https://cdn.jsdelivr.net/gh/xixu-me/RFM@universal/${fileName}.mrs`,
+      path: `./rulesets/${ruleName}.mrs`,
     };
     return acc;
   }, {});
