@@ -3,7 +3,7 @@
 // ################################################### this section can be flexibly customized ###################################################
 
 // Number of STATIC proxy groups (for IP-sensitive services)
-const STATIC_PROXY_COUNT = 3;
+const STATIC_PROXY_COUNT = 4;
 
 // Routing rules are matched in order from top to bottom, with the rule at the top of the list taking precedence over the rules below it.
 const services = [
