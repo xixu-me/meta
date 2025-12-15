@@ -207,7 +207,7 @@ const dns = {
   ipv6: true,
   "enhanced-mode": "fake-ip",
   "fake-ip-range": "198.18.0.1/16",
-  "fake-ip-range6": "fc00::/18",
+  "fake-ip-range6": "fd00::/18",
   "fake-ip-filter-mode": "blacklist",
   "fake-ip-filter": [
     "rule-set:fake-ip-filter",
@@ -222,7 +222,8 @@ const dns = {
   ],
   "proxy-server-nameserver": chineseNameservers,
   "nameserver-policy": {
-    "rule-set:private,direct,geolocation-cn": chineseNameservers,
+    "rule-set:private": ["system://"]
+    "rule-set:direct,geolocation-cn": chineseNameservers,
   },
   nameserver: internationalNameservers,
 };
