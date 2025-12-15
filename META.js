@@ -222,7 +222,7 @@ const dns = {
   ],
   "proxy-server-nameserver": chineseNameservers,
   "nameserver-policy": {
-    "rule-set:private": ["system://"]
+    "rule-set:private": ["system://"],
     "rule-set:direct,geolocation-cn": chineseNameservers,
   },
   nameserver: internationalNameservers,
