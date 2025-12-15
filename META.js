@@ -86,6 +86,11 @@ const locations = [
     filter: "(?i)\u9999\u6e2f|Hong Kong|HK|hong kong|hk|🇭🇰",
   },
   {
+    name: "India 🇮🇳",
+    icon: `${LOCATION_ICON_SET_URL}india`,
+    filter: "(?i)\u5370\u5ea6|India|IND|IN|india|ind|in|🇮🇳",
+  },
+  {
     name: "Iraq 🇮🇶",
     icon: `${LOCATION_ICON_SET_URL}iraq`,
     filter: "(?i)\u4f0a\u62c9\u514b|Iraq|IQ|iraq|iq|🇮🇶",
