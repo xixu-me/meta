@@ -22,7 +22,13 @@ const services = [
   // Social Media & Communication
   { name: "rednote", domain: "xiaohongshu.com", alias: "Xiaohongshu" },
   { name: "Telegram", tld: "org" },
-  { name: "Truth Social", tld: "com", sld: "truthsocial", alias: "TruthSocial" },
+  {
+    name: "Truth Social",
+    tld: "com",
+    sld: "truthsocial",
+    alias: "TruthSocial",
+  },
+  { name: "X", tld: "com" },
 
   // Financial Services
   { name: "Binance", tld: "com" },
