@@ -9,10 +9,8 @@ const STATIC_PROXY_COUNT = 4;
 const services = [
   // Media & Content
   { name: "bilibili", tld: "com" },
-  { name: "Medium", tld: "com" },
   { name: "Netflix", tld: "com" },
   { name: "Sora", domain: "sora.chatgpt.com" },
-  { name: "Spotify", tld: "com" },
   { name: "YouTube", tld: "com" },
 
   // AI/LLM Services
@@ -20,20 +18,11 @@ const services = [
   { name: "Gemini", tld: "google", alias: "Google-Gemini" },
   { name: "NotebookLM", tld: "google", alias: "Google-NotebookLM" },
   { name: "OpenAI", tld: "com" },
-  { name: "Perplexity", tld: "ai" },
-  { name: "xAI", tld: "ai", sld: "x" },
 
   // Social Media & Communication
-  { name: "Mastodon", tld: "social" },
   { name: "rednote", domain: "xiaohongshu.com", alias: "Xiaohongshu" },
   { name: "Telegram", tld: "org" },
-  {
-    name: "Truth Social",
-    tld: "com",
-    sld: "truthsocial",
-    alias: "TruthSocial",
-  },
-  { name: "X", tld: "com" },
+  { name: "Truth Social", tld: "com", sld: "truthsocial", alias: "TruthSocial" },
 
   // Financial Services
   { name: "Binance", tld: "com" },
