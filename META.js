@@ -16,7 +16,6 @@ const services = [
   // AI/LLM Services
   { name: "Anthropic", tld: "com" },
   { name: "Gemini", tld: "google", alias: "Google-Gemini" },
-  { name: "NotebookLM", tld: "google", alias: "Google-NotebookLM" },
   { name: "OpenAI", tld: "com" },
 
   // Social Media & Communication
