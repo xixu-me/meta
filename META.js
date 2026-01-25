@@ -33,7 +33,6 @@ const services = [
   { name: "Binance", tld: "com" },
   { name: "Bybit", tld: "com" },
   { name: "OKX", tld: "com" },
-  { name: "Pi", tld: "com", sld: "minepi" },
 
   // Technology Companies
   { name: "Apple", tld: "com" },
