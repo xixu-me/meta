@@ -51,101 +51,135 @@ const locations = [
   {
     name: "Argentina 🇦🇷",
     icon: `${LOCATION_ICON_SET_URL}argentina`,
-    filter: "(?i)\u963f\u6839\u5ef7|Argentina|ARG|AR|argentina|arg|ar|🇦🇷",
+    keywords: ["阿根廷", "Argentina"],
+    codes: ["ARG", "AR"],
+    emoji: ["🇦🇷"],
   },
   {
     name: "Canada 🇨🇦",
     icon: `${LOCATION_ICON_SET_URL}canada`,
-    filter: "(?i)\u52a0\u62ff\u5927|Canada|CAN|CA|canada|ca|🇨🇦",
+    keywords: ["加拿大", "Canada"],
+    codes: ["CAN", "CA"],
+    emoji: ["🇨🇦"],
   },
   {
     name: "Finland 🇫🇮",
     icon: `${LOCATION_ICON_SET_URL}finland`,
-    filter: "(?i)\u82ac\u5170|Finland|FIN|FI|finland|fin|fi|🇫🇮",
+    keywords: ["芬兰", "Finland"],
+    codes: ["FIN", "FI"],
+    emoji: ["🇫🇮"],
   },
   {
     name: "France 🇫🇷",
     icon: `${LOCATION_ICON_SET_URL}france`,
-    filter: "(?i)\u6cd5\u56fd|France|FR|france|fr|🇫🇷",
+    keywords: ["法国", "France"],
+    codes: ["FR"],
+    emoji: ["🇫🇷"],
   },
   {
     name: "Germany 🇩🇪",
     icon: `${LOCATION_ICON_SET_URL}germany`,
-    filter: "(?i)\u5fb7\u56fd|Germany|GER|DE|germany|ger|de|🇩🇪",
+    keywords: ["德国", "Germany"],
+    codes: ["GER", "DE"],
+    emoji: ["🇩🇪"],
   },
   {
     name: "Hong Kong, China 🇭🇰",
     icon: `${LOCATION_ICON_SET_URL}hongkong-circular`,
-    filter: "(?i)\u9999\u6e2f|Hong Kong|HK|hong kong|hk|🇭🇰",
+    keywords: ["香港", "Hong Kong"],
+    codes: ["HK"],
+    emoji: ["🇭🇰"],
   },
   {
     name: "India 🇮🇳",
     icon: `${LOCATION_ICON_SET_URL}india`,
-    filter: "(?i)\u5370\u5ea6|India|IND|IN|india|ind|in|🇮🇳",
+    keywords: ["印度", "India"],
+    codes: ["IND", "IN"],
+    emoji: ["🇮🇳"],
   },
   {
     name: "Iraq 🇮🇶",
     icon: `${LOCATION_ICON_SET_URL}iraq`,
-    filter: "(?i)\u4f0a\u62c9\u514b|Iraq|IQ|iraq|iq|🇮🇶",
+    keywords: ["伊拉克", "Iraq"],
+    codes: ["IQ"],
+    emoji: ["🇮🇶"],
   },
   {
     name: "Japan 🇯🇵",
     icon: `${LOCATION_ICON_SET_URL}japan`,
-    filter: "(?i)\u65e5\u672c|Japan|JP|japan|jp|🇯🇵",
+    keywords: ["日本", "Japan"],
+    codes: ["JP"],
+    emoji: ["🇯🇵"],
   },
   {
     name: "Korea 🇰🇷",
     icon: `${LOCATION_ICON_SET_URL}south-korea`,
-    filter: "(?i)\u97e9\u56fd|Korea|KR|korea|kr|🇰🇷",
+    keywords: ["韩国", "Korea"],
+    codes: ["KR"],
+    emoji: ["🇰🇷"],
   },
   {
     name: "Russia 🇷🇺",
     icon: `${LOCATION_ICON_SET_URL}russian-federation`,
-    filter:
-      "(?i)\u4fc4\u7f57\u65af|Russia Federation|Russia|RU|russia federation|russia|ru|🇷🇺",
+    keywords: ["俄罗斯", "Russia Federation", "Russia"],
+    codes: ["RU"],
+    emoji: ["🇷🇺"],
   },
   {
     name: "Singapore 🇸🇬",
     icon: `${LOCATION_ICON_SET_URL}singapore`,
-    filter: "(?i)\u65b0\u52a0\u5761|Singapore|SG|singapore|sg|🇸🇬",
+    keywords: ["新加坡", "Singapore"],
+    codes: ["SG"],
+    emoji: ["🇸🇬"],
   },
   {
     name: "Taiwan, China 🇨🇳",
     icon: `${LOCATION_ICON_SET_URL}china-circular`,
-    filter: "(?i)\u53f0\u6e7e|Taiwan|TW|taiwan|tw|\uD83C\uDDF9\uD83C\uDDFC",
+    keywords: ["台湾", "Taiwan"],
+    codes: ["TW"],
+    emoji: ["🇹🇼"],
   },
   {
     name: "Thailand 🇹🇭",
     icon: `${LOCATION_ICON_SET_URL}thailand`,
-    filter: "(?i)\u6cf0\u56fd|Thailand|TH|thailand|th|🇹🇭",
+    keywords: ["泰国", "Thailand"],
+    codes: ["TH"],
+    emoji: ["🇹🇭"],
   },
   {
     name: "Türkiye 🇹🇷",
     icon: `${LOCATION_ICON_SET_URL}turkey`,
-    filter:
-      "(?i)\u571f\u8033\u5176|Türkiye|Turkey|TUR|TR|türkiye|turkey|tur|tr|🇹🇷",
+    keywords: ["土耳其", "Türkiye", "Turkey"],
+    codes: ["TUR", "TR"],
+    emoji: ["🇹🇷"],
   },
   {
     name: "Ukraine 🇺🇦",
     icon: `${LOCATION_ICON_SET_URL}ukraine`,
-    filter: "(?i)\u4e4c\u514b\u5170|Ukraine|UKR|UA|ukraine|ukr|ua|🇺🇦",
+    keywords: ["乌克兰", "Ukraine"],
+    codes: ["UKR", "UA"],
+    emoji: ["🇺🇦"],
   },
   {
     name: "United Kingdom 🇬🇧",
     icon: `${LOCATION_ICON_SET_URL}great-britain`,
-    filter:
-      "(?i)\u82f1\u56fd|United Kingdom|Great Britain|UK|GB|united kingdom|great britain|uk|gb|🇬🇧",
+    keywords: ["英国", "United Kingdom", "Great Britain"],
+    codes: ["UK", "GB"],
+    emoji: ["🇬🇧"],
   },
   {
     name: "United States 🇺🇸",
     icon: `${LOCATION_ICON_SET_URL}usa`,
-    filter:
-      "(?i)\u7f8e\u56fd|United States of America|United States|USA|US|united states of america|united states|usa|us|🇺🇸",
+    keywords: ["美国", "United States of America", "United States"],
+    codes: ["USA", "US"],
+    emoji: ["🇺🇸"],
   },
   {
     name: "Global 🌐",
     icon: "https://img.icons8.com/?size=144&id=3685&format=png&color=7bbbe9",
-    filter: "(?i)Global|GL|global|gl|Cloudflare|CF|cloudflare|cf|🌐",
+    keywords: ["Global", "Cloudflare"],
+    codes: ["GL", "CF"],
+    emoji: ["🌐"],
   },
 ];
 
@@ -154,6 +188,24 @@ const locations = [
 function extractFavicon(domain) {
   return `https://t1.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=https://${domain}&size=128`;
 }
+
+function escapeRegex(text) {
+  return text.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
+
+function buildLocationFilter({ keywords = [], codes = [], emoji = [] }) {
+  const patterns = [
+    ...keywords.map((keyword) => escapeRegex(keyword)),
+    ...codes.map((code) => `\\b${escapeRegex(code)}\\b`),
+    ...emoji.map((symbol) => escapeRegex(symbol)),
+  ];
+
+  return `(?i)${patterns.join("|")}`;
+}
+
+locations.forEach((location) => {
+  location.filter = buildLocationFilter(location);
+});
 
 // General Configuration
 
@@ -170,7 +222,6 @@ const generalConfig = {
   },
   "unified-delay": true,
   "tcp-concurrent": true,
-  "global-client-fingerprint": "chrome",
   "global-ua": "\u0063\u006c\u0061\u0073\u0068.\u006D\u0065\u0074\u0061",
   "etag-support": true,
 };
@@ -237,7 +288,6 @@ const tun = {
   enable: true,
   stack: "mixed",
   "auto-route": true,
-  "auto-redirect": true,
   "auto-detect-interface": true,
   "strict-route": true,
   "dns-hijack": ["any:53", "tcp://any:53"],
@@ -663,8 +713,26 @@ function validateOriginalConfig(config) {
       "The original configuration must contain a non-empty proxies array (see https://wiki.\u006D\u0065\u0074\u0061\u0063\u0075\u0062\u0065\u0078.one/en/config/proxies/) or a proxy-providers object with at least one property (see https://wiki.\u006D\u0065\u0074\u0061\u0063\u0075\u0062\u0065\u0078.one/en/config/proxy-providers/)"
     );
   if (proxyCount > 0) {
+    const proxiesWithoutRemoteEndpoint = new Set([
+      "direct",
+      "dns",
+      "pass",
+      "reject",
+    ]);
+
     config.proxies.forEach((proxy, index) => {
-      if (!proxy.name || !proxy.type || !proxy.server || !proxy.port) {
+      if (!proxy.name || !proxy.type) {
+        throw new Error(
+          `Invalid proxy number ${
+            index + 1
+          } configuration (see https://wiki.\u006D\u0065\u0074\u0061\u0063\u0075\u0062\u0065\u0078.one/en/config/proxies/)`
+        );
+      }
+
+      if (
+        !proxiesWithoutRemoteEndpoint.has(String(proxy.type).toLowerCase()) &&
+        (!proxy.server || proxy.port == null)
+      ) {
         throw new Error(
           `Invalid proxy number ${
             index + 1
