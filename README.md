@@ -1,127 +1,105 @@
-# META - Modular Enhanced Traffic Architecture
+# META
 
-META is a comprehensive configuration generator for network traffic management, providing intelligent routing rules and proxy configurations for various online services across different geographical locations. It's designed to work with network management tools that support JavaScript parser overrides or YAML configurations.
+META stands for Modular Enhanced Traffic Architecture.
 
-## Features
+That idea shapes the project itself: the inputs stay modular, the generated output adds stronger routing structure on top, and the overall repository is organized as an architecture with clear roles for source, validation, and published artifacts.
 
-- **Service-based routing**: Automatically route traffic for popular services (OpenAI, Google, YouTube, Telegram, etc.)
-- **Location-based proxy grouping**: Organize proxies by geographical location
-- **Multiple proxy strategies**: Support for direct selection, auto-testing, fallback, and load balancing
-- **Comprehensive rule providers**: Pre-configured rulesets for applications, domains, and IP ranges
-- **Optimized DNS configuration**: Different nameservers for mainland China and international services
-- **TUN mode support**: System-level traffic capture and routing
-- **Smart proxy group generation**: Automatically create proxy groups based on available proxies
+The repository currently uses a split branch model:
 
-## Quick Start
+- `main`: project documentation
+- `script`: source code, tests, and GitHub Actions workflow
+- `config`: generated `META.yaml`
 
-### Import Options
+> [!NOTE]
+> If you want to use or customize META, the source of truth is the `script` branch. The `config` branch is generated from it after CI passes.
 
-Choose one of the following URLs to import META into your network management tool:
+## What META Generates
 
-#### JavaScript
+META starts from your existing proxy configuration and builds a layered traffic profile instead of leaving you with a flat set of raw inputs:
+
+- Service-oriented policy groups
+- Location-based groups with `select`, `url-test`, `fallback`, and multiple load-balancing strategies
+- DNS, TUN, rule providers, and routing rules for a broad range of network environments
+- A published YAML artifact for users who prefer a static configuration
+
+The generator preserves your original proxies or proxy providers, then injects META's standardized policy groups and rules on top.
+
+## Import URLs
+
+META currently documents both direct raw access and [Xget](https://github.com/xixu-me/xget) for remote imports.
+
+### JavaScript
 
 | Source | URL |
-|--------|-----|
-| GitHub Raw | <https://raw.githubusercontent.com/xixu-me/META/refs/heads/script/META.js> |
-| Xget | <https://xget.xi-xu.me/gh/xixu-me/META/raw/refs/heads/script/META.js> |
-| jsDelivr | <https://cdn.jsdelivr.net/gh/xixu-me/META@refs/heads/script/META.js> |
+| --- | --- |
+| GitHub Raw | <https://raw.githubusercontent.com/xixu-me/meta/refs/heads/script/META.js> |
+| Xget | <https://xget.xi-xu.me/gh/xixu-me/meta/raw/refs/heads/script/META.js> |
 
-#### YAML
+### YAML
 
 | Source | URL |
-|--------|-----|
-| GitHub blob | <https://github.com/xixu-me/META/blob/config/META.yaml> |
-
-The YAML configuration is automatically generated from the JavaScript version and is updated whenever the JavaScript version changes. This provides a static configuration option for users who prefer not to use JavaScript overrides.
-
-## Configuration Structure
-
-The META configuration includes:
-
-- **General Settings**: Basic configuration for the proxy management system
-- **DNS Settings**: Optimized DNS servers for different scenarios
-- **Proxy Groups**: Organized by services and geographical locations
-- **Routing Rules**: Prioritized rules for traffic routing
-- **Rule Providers**: External rulesets for different services and scenarios
+| --- | --- |
+| GitHub Raw | <https://raw.githubusercontent.com/xixu-me/meta/refs/heads/config/META.yaml> |
+| Xget | <https://xget.xi-xu.me/gh/xixu-me/meta/raw/refs/heads/config/META.yaml> |
 
 ## Customization
 
-The JavaScript has a designated customization section at the top:
+`META.js` is intentionally organized so the top section is the only part most users need to edit:
 
 ```javascript
 // ################################################### this section can be flexibly customized ###################################################
 ```
 
-Here you can modify:
+The main customization points are:
 
-1. **Services**: Add, remove, or reorder services for routing
-2. **Locations**: Configure geographical locations for proxy organization
-3. **Icons**: Customize the icons for services and locations
+- `STATIC_PROXY_COUNT`: number of static groups for IP-sensitive services
+- `services`: service list and icon/domain metadata
+- `locations`: country and region groups, including keywords, country codes, and emoji matchers
 
-For a user-friendly way to create custom the JavaScript, use the **[META.js Customizer](https://github.com/xixu-me/META.js-Customizer)** web app at [metajs.xi-xu.me](https://metajs.xi-xu.me). This tool provides an intuitive interface to select services and generate personalized configurations.
+META derives the more error-prone parts, such as location filter regexes, from this top-level data so the editable surface stays small while the generated structure stays rich.
 
-## Key Components
+For a GUI-based workflow, use [META.js Customizer](https://github.com/xixu-me/META.js-Customizer) at [metajs.xi-xu.me](https://metajs.xi-xu.me).
 
-### Rule Providers
+## RFM Integration
 
-META integrates with **[RFM (Rulesets for META)](https://github.com/xixu-me/RFM)** for comprehensive and frequently updated rulesets. RFM provides:
+META is built around [RFM](https://github.com/xixu-me/rfm), which provides the ruleset foundation for the generated configuration.
 
-- **Multiple format support**: Both MRS (binary) and YAML formats
-- **Frequent updates**: Rulesets rebuilt multiple times daily
-- **Comprehensive coverage**: Aggregated from multiple reliable sources
-- **Optimized processing**: Redundancy removal and intelligent domain handling
+- META consumes RFM rulesets as its primary rule-provider source
+- Domain, classical, and IP-based routing behavior are organized around RFM outputs
+- Keeping RFM current directly improves the quality and coverage of META's generated configuration
 
-### Location Configuration
+Within the overall project structure, META acts as the assembly layer while RFM supplies the ruleset base that gives the generated output its breadth and consistency.
 
-Locations help organize proxies geographically with:
+## Maintenance
 
-- Name with emoji
-- Icon URL
-- Filter regex for matching proxies
+The branches are intentionally separated:
 
-### Proxy Groups
+- `script` is where generator changes, tests, and workflow updates happen
+- `config` is force-updated by GitHub Actions with the latest generated YAML
+- `main` is the stable documentation entrypoint for the project
 
-Several types of proxy groups are automatically generated:
+The source branch uses Bun for local verification and publishes the generated YAML only after automated checks pass. This keeps the documentation branch, source branch, and generated branch aligned without turning the main README into a workflow manual.
 
-- Main selector groups (PROXY, AUTO, STATIC)
-- Service-specific groups
-- Location-based groups
-- Strategy groups (url-test, fallback, load-balance)
+## Design Notes
 
-### Rules
+The project leans into the meaning behind its name: small editable building blocks, stronger generated defaults, and a structure that can scale without turning into a monolithic config blob.
 
-Traffic routing rules are prioritized from top to bottom:
-
-1. Direct rules (applications, LAN, private)
-2. Advertising blocks
-3. Service-specific rules
-4. Geographic rules
-5. Fallback rules
-
-## Usage Guidelines
-
-1. **Easy customization**: Use the [META.js Customizer](https://github.com/xixu-me/META.js-Customizer) for an intuitive configuration experience
-2. **First-time setup**: Import the JavaScript or YAML into your network management tool
-3. **Proxy source**: Ensure you have configured proxy sources (providers or individual proxies)
-4. **Service selection**: Use the automatically generated service groups to select routing preferences
-5. **Location selection**: Choose geographic routing preferences using location groups
+- It treats service routing as the primary UX surface instead of exposing only raw proxy groups
+- It generates several per-location strategies automatically so users can switch between stability and performance without editing rules
+- It keeps source validation strict enough to catch malformed inputs while still supporting special outbound forms used by the underlying ecosystem
+- It favors portable defaults so the generated configuration travels better across different clients and environments
 
 ## Related Projects
 
-- **[META.js Customizer](https://github.com/xixu-me/META.js-Customizer)**: Web-based configuration generator with intuitive interface
-- **[RFM (Rulesets for META)](https://github.com/xixu-me/RFM)**: Comprehensive and frequently updated rulesets collection
+- [META.js Customizer](https://github.com/xixu-me/META.js-Customizer): browser-based META configuration builder
+- [RFM](https://github.com/xixu-me/rfm): ruleset backbone used by META
 
 ## Disclaimer
 
-- **Usage Responsibility**: META is provided as a configuration tool only. Users are solely responsible for how they implement and use these configurations.
-- **No Warranty**: This software is provided "as is" without warranty of any kind, express or implied. The developers make no guarantees regarding its performance, reliability, or suitability for any purpose.
-- **Legal Compliance**: Users must ensure their use of META complies with all applicable local, national, and international laws and regulations. The use of proxies may be restricted or regulated in certain jurisdictions.
-- **Service Compatibility**: While META aims to provide optimal routing for various services, changes to those services may affect functionality. No guarantee is made regarding compatibility with any specific service.
-- **Security Considerations**: Users should review all configurations before implementation in production environments. The developers are not responsible for any security vulnerabilities that may arise from using these configurations.
-- **Third-Party Services**: META interacts with various third-party services but is not affiliated with, endorsed by, or sponsored by any of these services.
+- META is a configuration generator. You are responsible for how you deploy and use the generated configuration.
+- Compatibility can change as clients, parsers, and third-party services evolve.
+- Review generated output before using it in environments where routing, privacy, or availability is sensitive.
 
 ## License
 
-Copyright &copy; [Xi Xu](https://xi-xu.me)
-
-Licensed under the [GPL-3.0](LICENSE) license.  
+Licensed under the MIT License. See [LICENSE](`LICENSE`).
