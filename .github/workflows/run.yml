@@ -7,20 +7,38 @@ on:
   workflow_dispatch:
 
 jobs:
-  check-script:
+  ci:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
+      - name: Set up Bun
+        uses: oven-sh/setup-bun@v2
         with:
-          node-version: 22.x
-      - name: Run script
-        run: node META.js
+          bun-version: latest
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+      - name: Run test suite
+        run: bun test META.test.js workflow.test.js
+
+  run:
+    runs-on: ubuntu-latest
+    needs: ci
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Set up Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+      - name: Validate runnable scenarios
+        run: bun run run
+
   purge-dns-cache:
     runs-on: ubuntu-latest
-    needs: check-script
+    needs: run
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -29,56 +47,25 @@ jobs:
           for file in $(ls); do
             curl -i "https://purge.jsdelivr.net/gh/${{ github.repository }}@script/${file}"
           done
+
   generate-config:
     runs-on: ubuntu-latest
-    needs: check-script
+    needs: run
+    permissions:
+      contents: write
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
+      - name: Set up Bun
+        uses: oven-sh/setup-bun@v2
         with:
-          node-version: "20"
-      - name: Remove validation function
-        run: |
-          sed -i '/function validateOriginalConfig/,/^}/d' META.js
-          sed -i 's/validateOriginalConfig(config);//' META.js
+          bun-version: latest
       - name: Install dependencies
-        run: npm install yaml
-      - name: Create conversion script
-        run: |
-          cat > generate.js << 'EOL'
-          const fs = require('fs');
-          const vm = require('vm');
-          const yaml = require('yaml');
-          // Read the JS config file
-          const jsContent = fs.readFileSync('./META.js', 'utf8');
-          // Create a sandbox context
-          const context = {
-            console,
-            require,
-            process,
-            __dirname,
-            module,
-            exports,
-          };
-          // Create empty config object
-          const baseConfig = {};
-          // Prepare the script
-          const fullScript = `${jsContent}\nmodule.exports = main(${JSON.stringify(baseConfig)});`;
-          // Execute in sandbox
-          vm.createContext(context);
-          vm.runInContext(fullScript, context);
-          // Get the result and convert to YAML
-          const config = context.module.exports;
-          const yamlContent = yaml.stringify(config);
-          // Write output
-          fs.writeFileSync('./META.yaml', yamlContent);
-          EOL
+        run: bun install --frozen-lockfile
       - name: Generate YAML configuration
         run: |
           mkdir -p publish
-          node generate.js
+          bun run generate
           cat > publish/META.yaml << 'EOL'
           proxy-providers-defaults: &ppd
             type: http

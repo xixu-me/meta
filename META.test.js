@@ -59,6 +59,16 @@ test("generated config does not force deprecated global fingerprinting", () => {
   assert.equal(config["global-client-fingerprint"], undefined);
 });
 
+test("main can skip source validation for publish-time generation", () => {
+  const { main } = loadMetaModule();
+
+  const config = main({}, { skipValidation: true });
+
+  assert.equal(config.error, undefined);
+  assert.ok(Array.isArray(config.rules));
+  assert.ok(Array.isArray(config["proxy-groups"]));
+});
+
 test("generated tun config fully replaces the source tun settings", () => {
   const { main } = loadMetaModule();
 

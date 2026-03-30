@@ -763,9 +763,11 @@ function validateOriginalConfig(config) {
   return true;
 }
 
-function main(config) {
+function main(config, options = {}) {
   try {
-    validateOriginalConfig(config);
+    if (!options.skipValidation) {
+      validateOriginalConfig(config);
+    }
     Object.assign(config, generalConfig, {
       dns,
       hosts,

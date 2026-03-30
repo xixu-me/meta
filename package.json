@@ -1,0 +1,12 @@
+{
+  "name": "meta",
+  "private": true,
+  "scripts": {
+    "generate": "bun META.generate.js",
+    "test": "bun test META.test.js workflow.test.js",
+    "run": "bun META.run.js"
+  },
+  "dependencies": {
+    "yaml": "^2.8.1"
+  }
+}
