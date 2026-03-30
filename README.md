@@ -102,4 +102,4 @@ The project leans into the meaning behind its name: small editable building bloc
 
 ## License
 
-Licensed under the MIT License. See [LICENSE](`LICENSE`).
+Licensed under the MIT License. See [`LICENSE`](./LICENSE).
