@@ -1,9 +1,10 @@
 const fs = require("node:fs");
+const path = require("node:path");
 const vm = require("node:vm");
 const yaml = require("yaml");
 
 function loadMain() {
-  const content = fs.readFileSync("./META.js", "utf8");
+  const content = fs.readFileSync(path.join(__dirname, "META.js"), "utf8");
   const wrapped = `${content}
 
 module.exports = { main };`;
@@ -28,7 +29,7 @@ function main() {
     throw new Error(config.error);
   }
 
-  fs.writeFileSync("./META.yaml", yaml.stringify(config));
+  fs.writeFileSync(path.join(__dirname, "META.yaml"), yaml.stringify(config));
   console.log("Generated META.yaml");
 }
 

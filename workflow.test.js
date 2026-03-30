@@ -4,7 +4,7 @@ const fs = require("node:fs");
 const path = require("node:path");
 const childProcess = require("node:child_process");
 
-const repoRoot = "E:/github/meta";
+const repoRoot = __dirname;
 const workflowPath = path.join(repoRoot, ".github", "workflows", "run.yml");
 const runScriptPath = path.join(repoRoot, "META.run.js");
 

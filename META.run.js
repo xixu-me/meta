@@ -1,8 +1,9 @@
 const fs = require("node:fs");
+const path = require("node:path");
 const vm = require("node:vm");
 
 function loadMetaModule() {
-  const content = fs.readFileSync("./META.js", "utf8");
+  const content = fs.readFileSync(path.join(__dirname, "META.js"), "utf8");
   const wrapped = `${content}
 
 module.exports = {

@@ -1,10 +1,13 @@
 const test = require("node:test");
 const assert = require("node:assert/strict");
 const fs = require("node:fs");
+const path = require("node:path");
 const vm = require("node:vm");
 
+const repoRoot = __dirname;
+
 function loadMetaModule() {
-  const content = fs.readFileSync("E:/github/meta/META.js", "utf8");
+  const content = fs.readFileSync(path.join(repoRoot, "META.js"), "utf8");
   const wrapped = `${content}
 
 module.exports = {
