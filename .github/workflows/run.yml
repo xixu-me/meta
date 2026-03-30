@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
       - name: Set up Bun
         uses: oven-sh/setup-bun@v2
         with:
@@ -26,7 +26,7 @@ jobs:
     needs: ci
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
       - name: Set up Bun
         uses: oven-sh/setup-bun@v2
         with:
@@ -41,7 +41,7 @@ jobs:
     needs: run
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
       - name: Purge CDN cache
         run: |
           for file in $(ls); do
@@ -55,7 +55,7 @@ jobs:
       contents: write
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
       - name: Set up Bun
         uses: oven-sh/setup-bun@v2
         with:
