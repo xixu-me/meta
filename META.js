@@ -10,7 +10,6 @@ const services = [
   // Media & Content
   { name: "bilibili", tld: "com" },
   { name: "Netflix", tld: "com" },
-  { name: "Sora", domain: "sora.chatgpt.com" },
   { name: "YouTube", tld: "com" },
 
   // AI/LLM Services
@@ -19,6 +18,7 @@ const services = [
   { name: "OpenAI", tld: "com" },
 
   // Social Media & Communication
+  { name: "Douyin", domain: "douyin.com", alias: "Douyin" },
   { name: "rednote", domain: "xiaohongshu.com", alias: "Xiaohongshu" },
   { name: "Telegram", tld: "org" },
   {
@@ -310,7 +310,7 @@ function generateStaticProxyNames() {
   }
   return Array.from(
     { length: STATIC_PROXY_COUNT },
-    (_, i) => `STATIC-${i + 1}`
+    (_, i) => `STATIC-${i + 1}`,
   );
 }
 
@@ -363,7 +363,7 @@ function generateLocationPolicyProxyGroups(
   items,
   defaultConfig,
   type,
-  extraProps = {}
+  extraProps = {},
 ) {
   const getStrategyName = (type, strategy) => {
     switch (type) {
@@ -501,12 +501,12 @@ const proxyGroups = [
     "url-test",
     {
       tolerance: 50,
-    }
+    },
   ),
   ...generateLocationPolicyProxyGroups(
     locations,
     locationPolicyProxyGroupDefaults,
-    "fallback"
+    "fallback",
   ),
   ...generateLocationPolicyProxyGroups(
     locations,
@@ -514,7 +514,7 @@ const proxyGroups = [
     "load-balance",
     {
       strategy: "round-robin",
-    }
+    },
   ),
   ...generateLocationPolicyProxyGroups(
     locations,
@@ -522,7 +522,7 @@ const proxyGroups = [
     "load-balance",
     {
       strategy: "consistent-hashing",
-    }
+    },
   ),
   ...generateLocationPolicyProxyGroups(
     locations,
@@ -530,7 +530,7 @@ const proxyGroups = [
     "load-balance",
     {
       strategy: "sticky-sessions",
-    }
+    },
   ),
   ...generateLocationSelectProxyGroups(),
 ];
@@ -539,7 +539,7 @@ const proxyGroups = [
 
 function generateServiceRules(services) {
   return services.map(
-    ({ name }) => `RULE-SET,${name.toLowerCase().replace(/\s+/g, "")},${name}`
+    ({ name }) => `RULE-SET,${name.toLowerCase().replace(/\s+/g, "")},${name}`,
   );
 }
 
@@ -706,11 +706,11 @@ function validateOriginalConfig(config) {
     throw new Error("Configuration object cannot be null or undefined");
   const proxyCount = Array.isArray(config.proxies) ? config.proxies.length : 0;
   const proxyProviderCount = Object.keys(
-    config["proxy-providers"] || {}
+    config["proxy-providers"] || {},
   ).length;
   if (proxyCount === 0 && proxyProviderCount === 0)
     throw new Error(
-      "The original configuration must contain a non-empty proxies array (see https://wiki.\u006D\u0065\u0074\u0061\u0063\u0075\u0062\u0065\u0078.one/en/config/proxies/) or a proxy-providers object with at least one property (see https://wiki.\u006D\u0065\u0074\u0061\u0063\u0075\u0062\u0065\u0078.one/en/config/proxy-providers/)"
+      "The original configuration must contain a non-empty proxies array (see https://wiki.\u006D\u0065\u0074\u0061\u0063\u0075\u0062\u0065\u0078.one/en/config/proxies/) or a proxy-providers object with at least one property (see https://wiki.\u006D\u0065\u0074\u0061\u0063\u0075\u0062\u0065\u0078.one/en/config/proxy-providers/)",
     );
   if (proxyCount > 0) {
     const proxiesWithoutRemoteEndpoint = new Set([
@@ -725,7 +725,7 @@ function validateOriginalConfig(config) {
         throw new Error(
           `Invalid proxy number ${
             index + 1
-          } configuration (see https://wiki.\u006D\u0065\u0074\u0061\u0063\u0075\u0062\u0065\u0078.one/en/config/proxies/)`
+          } configuration (see https://wiki.\u006D\u0065\u0074\u0061\u0063\u0075\u0062\u0065\u0078.one/en/config/proxies/)`,
         );
       }
 
@@ -736,12 +736,12 @@ function validateOriginalConfig(config) {
         throw new Error(
           `Invalid proxy number ${
             index + 1
-          } configuration (see https://wiki.\u006D\u0065\u0074\u0061\u0063\u0075\u0062\u0065\u0078.one/en/config/proxies/)`
+          } configuration (see https://wiki.\u006D\u0065\u0074\u0061\u0063\u0075\u0062\u0065\u0078.one/en/config/proxies/)`,
         );
       }
     });
     console.log(
-      `The original configuration contains ${proxyCount} proxies, which will be preserved`
+      `The original configuration contains ${proxyCount} proxies, which will be preserved`,
     );
   }
   if (proxyProviderCount > 0) {
@@ -751,13 +751,13 @@ function validateOriginalConfig(config) {
           throw new Error(
             `Invalid proxy provider number ${
               index + 1
-            } configuration (see https://wiki.\u006D\u0065\u0074\u0061\u0063\u0075\u0062\u0065\u0078.one/en/config/proxy-providers/)`
+            } configuration (see https://wiki.\u006D\u0065\u0074\u0061\u0063\u0075\u0062\u0065\u0078.one/en/config/proxy-providers/)`,
           );
         }
-      }
+      },
     );
     console.log(
-      `The original configuration contains ${proxyProviderCount} proxy providers, which will be preserved`
+      `The original configuration contains ${proxyProviderCount} proxy providers, which will be preserved`,
     );
   }
   return true;
@@ -782,7 +782,7 @@ function main(config, options = {}) {
     return config;
   } catch (error) {
     console.error(
-      `An error occurred during configuration generation: ${error.message}`
+      `An error occurred during configuration generation: ${error.message}`,
     );
     return { error: error.message, originalConfig: config };
   }
