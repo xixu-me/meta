@@ -1,0 +1,2240 @@
+proxy-providers-defaults: &ppd
+  type: http
+  interval: 86400
+  health-check:
+    enable: true
+    url: "https://www.gstatic.com/generate_204"
+    interval: 300
+  filter: "^(?!.*(群|邀请|返利|循环|官网|客服|网站|网址|获取|订阅|流量|到期|机场|下次|版本|官址|备用|过期|已用|联系|邮箱|工单|贩卖|通知|倒卖|防止|国内|地址|频道|无法|说明|使用|提示|特别|访问|支持|教程|关注|更新|作者|加入|USE|USED|TOTAL|EXPIRE|EMAIL|Panel|Channel|Author))"
+proxy-providers:
+  Provider A:
+    <<: *ppd
+    url: "https://the.url.of/A.yaml"
+    override:
+      additional-prefix: "[A] "
+  Provider B:
+    <<: *ppd
+    url: "https://the.url.of/B.yaml"
+    override:
+      additional-prefix: "[B] "
+  Provider C:
+    <<: *ppd
+    url: "https://the.url.of/C.yaml"
+    override:
+      additional-prefix: "[C] "
+mixed-port: 7890
+allow-lan: false
+mode: rule
+log-level: info
+ipv6: true
+find-process-mode: strict
+profile:
+  store-selected: true
+  store-fake-ip: true
+unified-delay: true
+tcp-concurrent: true
+global-ua: clash.meta
+etag-support: true
+dns:
+  enable: true
+  cache-algorithm: arc
+  prefer-h3: false
+  use-hosts: true
+  use-system-hosts: false
+  respect-rules: true
+  ipv6: true
+  enhanced-mode: fake-ip
+  fake-ip-range: 198.18.0.1/16
+  fake-ip-range6: fd00::/18
+  fake-ip-filter-mode: blacklist
+  fake-ip-filter:
+    - rule-set:fake-ip-filter
+    - rule-set:direct
+    - rule-set:private
+    - rule-set:connectivity-check
+  default-nameserver:
+    - tls://223.5.5.5
+    - tls://223.6.6.6
+    - tls://119.29.29.29
+  proxy-server-nameserver: &a1
+    - https://dns.alidns.com/dns-query
+    - https://doh.pub/dns-query
+  nameserver-policy:
+    rule-set:private:
+      - system://
+    rule-set:direct,geolocation-cn: *a1
+  nameserver:
+    - https://cloudflare-dns.com/dns-query
+    - https://dns.google/dns-query
+hosts: {}
+sniffer:
+  enable: false
+tun:
+  enable: true
+  stack: mixed
+  auto-route: true
+  auto-detect-interface: true
+  strict-route: true
+  dns-hijack:
+    - any:53
+    - tcp://any:53
+proxy-groups:
+  - url: https://www.gstatic.com/generate_204
+    interval: 300
+    lazy: true
+    timeout: 5000
+    max-failed-times: 5
+    name: PROXY
+    type: select
+    proxies:
+      - STATIC-1
+      - STATIC-2
+      - STATIC-3
+      - STATIC-4
+      - AUTO
+      - DIRECT
+      - Chinese Mainland 🇨🇳
+      - Argentina 🇦🇷
+      - Canada 🇨🇦
+      - Finland 🇫🇮
+      - France 🇫🇷
+      - Germany 🇩🇪
+      - Hong Kong, China 🇭🇰
+      - India 🇮🇳
+      - Iraq 🇮🇶
+      - Japan 🇯🇵
+      - Korea 🇰🇷
+      - Russia 🇷🇺
+      - Singapore 🇸🇬
+      - Taiwan, China 🇨🇳
+      - Thailand 🇹🇭
+      - Türkiye 🇹🇷
+      - Ukraine 🇺🇦
+      - United Kingdom 🇬🇧
+      - United States 🇺🇸
+      - Global 🌐
+    icon: https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Proxy.png
+  - url: https://www.gstatic.com/generate_204
+    interval: 300
+    lazy: true
+    timeout: 5000
+    max-failed-times: 5
+    name: AUTO
+    type: url-test
+    tolerance: 50
+    include-all: true
+    icon: https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Auto.png
+    hidden: true
+  - url: https://www.gstatic.com/generate_204
+    interval: 300
+    lazy: true
+    timeout: 5000
+    max-failed-times: 5
+    name: STATIC-1
+    type: select
+    include-all: true
+    icon: https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Static.png
+  - url: https://www.gstatic.com/generate_204
+    interval: 300
+    lazy: true
+    timeout: 5000
+    max-failed-times: 5
+    name: STATIC-2
+    type: select
+    include-all: true
+    icon: https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Static.png
+  - url: https://www.gstatic.com/generate_204
+    interval: 300
+    lazy: true
+    timeout: 5000
+    max-failed-times: 5
+    name: STATIC-3
+    type: select
+    include-all: true
+    icon: https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Static.png
+  - url: https://www.gstatic.com/generate_204
+    interval: 300
+    lazy: true
+    timeout: 5000
+    max-failed-times: 5
+    name: STATIC-4
+    type: select
+    include-all: true
+    icon: https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Static.png
+  - url: https://www.gstatic.com/generate_204
+    interval: 300
+    lazy: true
+    timeout: 5000
+    max-failed-times: 5
+    name: bilibili
+    icon: https://cdn.jsdelivr.net/gh/xixu-me/favicons@assets/favicons/bilibili.com.png
+    type: select
+    proxies: &a2
+      - PROXY
+      - STATIC-1
+      - STATIC-2
+      - STATIC-3
+      - STATIC-4
+      - AUTO
+      - DIRECT
+      - Chinese Mainland 🇨🇳
+      - Argentina 🇦🇷
+      - Canada 🇨🇦
+      - Finland 🇫🇮
+      - France 🇫🇷
+      - Germany 🇩🇪
+      - Hong Kong, China 🇭🇰
+      - India 🇮🇳
+      - Iraq 🇮🇶
+      - Japan 🇯🇵
+      - Korea 🇰🇷
+      - Russia 🇷🇺
+      - Singapore 🇸🇬
+      - Taiwan, China 🇨🇳
+      - Thailand 🇹🇭
+      - Türkiye 🇹🇷
+      - Ukraine 🇺🇦
+      - United Kingdom 🇬🇧
+      - United States 🇺🇸
+      - Global 🌐
+  - url: https://www.gstatic.com/generate_204
+    interval: 300
+    lazy: true
+    timeout: 5000
+    max-failed-times: 5
+    name: Netflix
+    icon: https://cdn.jsdelivr.net/gh/xixu-me/favicons@assets/favicons/netflix.com.png
+    type: select
+    proxies: *a2
+  - url: https://www.gstatic.com/generate_204
+    interval: 300
+    lazy: true
+    timeout: 5000
+    max-failed-times: 5
+    name: YouTube
+    icon: https://cdn.jsdelivr.net/gh/xixu-me/favicons@assets/favicons/youtube.com.png
+    type: select
+    proxies: *a2
+  - url: https://www.gstatic.com/generate_204
+    interval: 300
+    lazy: true
+    timeout: 5000
+    max-failed-times: 5
+    name: Anthropic
+    icon: https://cdn.jsdelivr.net/gh/xixu-me/favicons@assets/favicons/anthropic.com.png
+    type: select
+    proxies: *a2
+  - url: https://www.gstatic.com/generate_204
+    interval: 300
+    lazy: true
+    timeout: 5000
+    max-failed-times: 5
+    name: Gemini
+    icon: https://cdn.jsdelivr.net/gh/xixu-me/favicons@assets/favicons/gemini.google.png
+    type: select
+    proxies: *a2
+  - url: https://www.gstatic.com/generate_204
+    interval: 300
+    lazy: true
+    timeout: 5000
+    max-failed-times: 5
+    name: OpenAI
+    icon: https://cdn.jsdelivr.net/gh/xixu-me/favicons@assets/favicons/openai.com.png
+    type: select
+    proxies: *a2
+  - url: https://www.gstatic.com/generate_204
+    interval: 300
+    lazy: true
+    timeout: 5000
+    max-failed-times: 5
+    name: Douyin
+    icon: https://t1.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=https://douyin.com&size=128
+    type: select
+    proxies: *a2
+  - url: https://www.gstatic.com/generate_204
+    interval: 300
+    lazy: true
+    timeout: 5000
+    max-failed-times: 5
+    name: rednote
+    icon: https://t1.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=https://xiaohongshu.com&size=128
+    type: select
+    proxies: *a2
+  - url: https://www.gstatic.com/generate_204
+    interval: 300
+    lazy: true
+    timeout: 5000
+    max-failed-times: 5
+    name: Telegram
+    icon: https://cdn.jsdelivr.net/gh/xixu-me/favicons@assets/favicons/telegram.org.png
+    type: select
+    proxies: *a2
+  - url: https://www.gstatic.com/generate_204
+    interval: 300
+    lazy: true
+    timeout: 5000
+    max-failed-times: 5
+    name: Truth Social
+    icon: https://cdn.jsdelivr.net/gh/xixu-me/favicons@assets/favicons/truthsocial.com.png
+    type: select
+    proxies: *a2
+  - url: https://www.gstatic.com/generate_204
+    interval: 300
+    lazy: true
+    timeout: 5000
+    max-failed-times: 5
+    name: X
+    icon: https://cdn.jsdelivr.net/gh/xixu-me/favicons@assets/favicons/x.com.png
+    type: select
+    proxies: *a2
+  - url: https://www.gstatic.com/generate_204
+    interval: 300
+    lazy: true
+    timeout: 5000
+    max-failed-times: 5
+    name: Binance
+    icon: https://cdn.jsdelivr.net/gh/xixu-me/favicons@assets/favicons/binance.com.png
+    type: select
+    proxies: *a2
+  - url: https://www.gstatic.com/generate_204
+    interval: 300
+    lazy: true
+    timeout: 5000
+    max-failed-times: 5
+    name: Bybit
+    icon: https://cdn.jsdelivr.net/gh/xixu-me/favicons@assets/favicons/bybit.com.png
+    type: select
+    proxies: *a2
+  - url: https://www.gstatic.com/generate_204
+    interval: 300
+    lazy: true
+    timeout: 5000
+    max-failed-times: 5
+    name: OKX
+    icon: https://cdn.jsdelivr.net/gh/xixu-me/favicons@assets/favicons/okx.com.png
+    type: select
+    proxies: *a2
+  - url: https://www.gstatic.com/generate_204
+    interval: 300
+    lazy: true
+    timeout: 5000
+    max-failed-times: 5
+    name: Apple
+    icon: https://cdn.jsdelivr.net/gh/xixu-me/favicons@assets/favicons/apple.com.png
+    type: select
+    proxies: *a2
+  - url: https://www.gstatic.com/generate_204
+    interval: 300
+    lazy: true
+    timeout: 5000
+    max-failed-times: 5
+    name: Google
+    icon: https://cdn.jsdelivr.net/gh/xixu-me/favicons@assets/favicons/about.google.png
+    type: select
+    proxies: *a2
+  - url: https://www.gstatic.com/generate_204
+    interval: 300
+    lazy: true
+    timeout: 5000
+    max-failed-times: 5
+    name: Microsoft
+    icon: https://cdn.jsdelivr.net/gh/xixu-me/favicons@assets/favicons/microsoft.com.png
+    type: select
+    proxies: *a2
+  - url: https://www.gstatic.com/generate_204
+    interval: 300
+    lazy: true
+    timeout: 5000
+    max-failed-times: 5
+    name: Speedtest
+    icon: https://cdn.jsdelivr.net/gh/xixu-me/favicons@assets/favicons/speedtest.net.png
+    type: select
+    proxies: *a2
+  - url: https://www.gstatic.com/generate_204
+    interval: 300
+    lazy: true
+    timeout: 5000
+    max-failed-times: 5
+    name: Xget
+    icon: https://t1.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=https://xuc.xi-xu.me&size=128
+    type: select
+    proxies: *a2
+  - url: https://www.gstatic.com/generate_204
+    interval: 300
+    lazy: true
+    timeout: 5000
+    max-failed-times: 5
+    name: Cloudflare
+    icon: https://cdn.jsdelivr.net/gh/xixu-me/favicons@assets/favicons/cloudflare.com.png
+    type: select
+    proxies: *a2
+  - url: https://www.gstatic.com/generate_204
+    interval: 300
+    lazy: true
+    timeout: 5000
+    max-failed-times: 5
+    name: Domestic
+    type: select
+    proxies:
+      - DIRECT
+      - PROXY
+      - STATIC-1
+      - STATIC-2
+      - STATIC-3
+      - STATIC-4
+      - AUTO
+      - Chinese Mainland 🇨🇳
+      - Argentina 🇦🇷
+      - Canada 🇨🇦
+      - Finland 🇫🇮
+      - France 🇫🇷
+      - Germany 🇩🇪
+      - Hong Kong, China 🇭🇰
+      - India 🇮🇳
+      - Iraq 🇮🇶
+      - Japan 🇯🇵
+      - Korea 🇰🇷
+      - Russia 🇷🇺
+      - Singapore 🇸🇬
+      - Taiwan, China 🇨🇳
+      - Thailand 🇹🇭
+      - Türkiye 🇹🇷
+      - Ukraine 🇺🇦
+      - United Kingdom 🇬🇧
+      - United States 🇺🇸
+      - Global 🌐
+    icon: https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Domestic.png
+  - url: https://www.gstatic.com/generate_204
+    interval: 300
+    lazy: true
+    timeout: 5000
+    max-failed-times: 5
+    name: Others
+    type: select
+    proxies:
+      - PROXY
+      - STATIC-1
+      - STATIC-2
+      - STATIC-3
+      - STATIC-4
+      - AUTO
+      - DIRECT
+      - Chinese Mainland 🇨🇳
+      - Argentina 🇦🇷
+      - Canada 🇨🇦
+      - Finland 🇫🇮
+      - France 🇫🇷
+      - Germany 🇩🇪
+      - Hong Kong, China 🇭🇰
+      - India 🇮🇳
+      - Iraq 🇮🇶
+      - Japan 🇯🇵
+      - Korea 🇰🇷
+      - Russia 🇷🇺
+      - Singapore 🇸🇬
+      - Taiwan, China 🇨🇳
+      - Thailand 🇹🇭
+      - Türkiye 🇹🇷
+      - Ukraine 🇺🇦
+      - United Kingdom 🇬🇧
+      - United States 🇺🇸
+      - Global 🌐
+    icon: https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Final.png
+  - url: https://www.gstatic.com/generate_204
+    interval: 300
+    lazy: true
+    timeout: 5000
+    max-failed-times: 5
+    name: Advertising
+    type: select
+    proxies:
+      - REJECT
+      - DIRECT
+      - STATIC-1
+      - STATIC-2
+      - STATIC-3
+      - STATIC-4
+    icon: https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Advertising.png
+  - url: https://www.gstatic.com/generate_204
+    interval: 300
+    lazy: true
+    timeout: 5000
+    max-failed-times: 5
+    proxies:
+      - REJECT
+    include-all: true
+    name: Chinese Mainland 🇨🇳
+    type: select
+    icon: https://img.icons8.com/color/144/china
+    filter: (?i)大陆|中国|电信|移动|联通|Mainland|China|CN|mainland|china|cn|🇨🇳
+  - url: https://www.gstatic.com/generate_204
+    interval: 300
+    lazy: true
+    timeout: 5000
+    max-failed-times: 5
+    proxies: &a3
+      - REJECT
+    include-all: true
+    name: AUTO 🇦🇷
+    type: url-test
+    icon: https://img.icons8.com/color/144/argentina
+    filter: (?i)阿根廷|Argentina|\bARG\b|\bAR\b|🇦🇷
+    hidden: true
+    tolerance: 50
+  - url: https://www.gstatic.com/generate_204
+    interval: 300
+    lazy: true
+    timeout: 5000
+    max-failed-times: 5
+    proxies: *a3
+    include-all: true
+    name: AUTO 🇨🇦
+    type: url-test
+    icon: https://img.icons8.com/color/144/canada
+    filter: (?i)加拿大|Canada|\bCAN\b|\bCA\b|🇨🇦
+    hidden: true
+    tolerance: 50
+  - url: https://www.gstatic.com/generate_204
+    interval: 300
+    lazy: true
+    timeout: 5000
+    max-failed-times: 5
+    proxies: *a3
+    include-all: true
+    name: AUTO 🇫🇮
+    type: url-test
+    icon: https://img.icons8.com/color/144/finland
+    filter: (?i)芬兰|Finland|\bFIN\b|\bFI\b|🇫🇮
+    hidden: true
+    tolerance: 50
+  - url: https://www.gstatic.com/generate_204
+    interval: 300
+    lazy: true
+    timeout: 5000
+    max-failed-times: 5
+    proxies: *a3
+    include-all: true
+    name: AUTO 🇫🇷
+    type: url-test
+    icon: https://img.icons8.com/color/144/france
+    filter: (?i)法国|France|\bFR\b|🇫🇷
+    hidden: true
+    tolerance: 50
+  - url: https://www.gstatic.com/generate_204
+    interval: 300
+    lazy: true
+    timeout: 5000
+    max-failed-times: 5
+    proxies: *a3
+    include-all: true
+    name: AUTO 🇩🇪
+    type: url-test
+    icon: https://img.icons8.com/color/144/germany
+    filter: (?i)德国|Germany|\bGER\b|\bDE\b|🇩🇪
+    hidden: true
+    tolerance: 50
+  - url: https://www.gstatic.com/generate_204
+    interval: 300
+    lazy: true
+    timeout: 5000
+    max-failed-times: 5
+    proxies: *a3
+    include-all: true
+    name: AUTO 🇭🇰
+    type: url-test
+    icon: https://img.icons8.com/color/144/hongkong-circular
+    filter: (?i)香港|Hong Kong|\bHK\b|🇭🇰
+    hidden: true
+    tolerance: 50
+  - url: https://www.gstatic.com/generate_204
+    interval: 300
+    lazy: true
+    timeout: 5000
+    max-failed-times: 5
+    proxies: *a3
+    include-all: true
+    name: AUTO 🇮🇳
+    type: url-test
+    icon: https://img.icons8.com/color/144/india
+    filter: (?i)印度|India|\bIND\b|\bIN\b|🇮🇳
+    hidden: true
+    tolerance: 50
+  - url: https://www.gstatic.com/generate_204
+    interval: 300
+    lazy: true
+    timeout: 5000
+    max-failed-times: 5
+    proxies: *a3
+    include-all: true
+    name: AUTO 🇮🇶
+    type: url-test
+    icon: https://img.icons8.com/color/144/iraq
+    filter: (?i)伊拉克|Iraq|\bIQ\b|🇮🇶
+    hidden: true
+    tolerance: 50
+  - url: https://www.gstatic.com/generate_204
+    interval: 300
+    lazy: true
+    timeout: 5000
+    max-failed-times: 5
+    proxies: *a3
+    include-all: true
+    name: AUTO 🇯🇵
+    type: url-test
+    icon: https://img.icons8.com/color/144/japan
+    filter: (?i)日本|Japan|\bJP\b|🇯🇵
+    hidden: true
+    tolerance: 50
+  - url: https://www.gstatic.com/generate_204
+    interval: 300
+    lazy: true
+    timeout: 5000
+    max-failed-times: 5
+    proxies: *a3
+    include-all: true
+    name: AUTO 🇰🇷
+    type: url-test
+    icon: https://img.icons8.com/color/144/south-korea
+    filter: (?i)韩国|Korea|\bKR\b|🇰🇷
+    hidden: true
+    tolerance: 50
+  - url: https://www.gstatic.com/generate_204
+    interval: 300
+    lazy: true
+    timeout: 5000
+    max-failed-times: 5
+    proxies: *a3
+    include-all: true
+    name: AUTO 🇷🇺
+    type: url-test
+    icon: https://img.icons8.com/color/144/russian-federation
+    filter: (?i)俄罗斯|Russia Federation|Russia|\bRU\b|🇷🇺
+    hidden: true
+    tolerance: 50
+  - url: https://www.gstatic.com/generate_204
+    interval: 300
+    lazy: true
+    timeout: 5000
+    max-failed-times: 5
+    proxies: *a3
+    include-all: true
+    name: AUTO 🇸🇬
+    type: url-test
+    icon: https://img.icons8.com/color/144/singapore
+    filter: (?i)新加坡|Singapore|\bSG\b|🇸🇬
+    hidden: true
+    tolerance: 50
+  - url: https://www.gstatic.com/generate_204
+    interval: 300
+    lazy: true
+    timeout: 5000
+    max-failed-times: 5
+    proxies: *a3
+    include-all: true
+    name: AUTO 🇨🇳
+    type: url-test
+    icon: https://img.icons8.com/color/144/china-circular
+    filter: (?i)台湾|Taiwan|\bTW\b|🇹🇼
+    hidden: true
+    tolerance: 50
+  - url: https://www.gstatic.com/generate_204
+    interval: 300
+    lazy: true
+    timeout: 5000
+    max-failed-times: 5
+    proxies: *a3
+    include-all: true
+    name: AUTO 🇹🇭
+    type: url-test
+    icon: https://img.icons8.com/color/144/thailand
+    filter: (?i)泰国|Thailand|\bTH\b|🇹🇭
+    hidden: true
+    tolerance: 50
+  - url: https://www.gstatic.com/generate_204
+    interval: 300
+    lazy: true
+    timeout: 5000
+    max-failed-times: 5
+    proxies: *a3
+    include-all: true
+    name: AUTO 🇹🇷
+    type: url-test
+    icon: https://img.icons8.com/color/144/turkey
+    filter: (?i)土耳其|Türkiye|Turkey|\bTUR\b|\bTR\b|🇹🇷
+    hidden: true
+    tolerance: 50
+  - url: https://www.gstatic.com/generate_204
+    interval: 300
+    lazy: true
+    timeout: 5000
+    max-failed-times: 5
+    proxies: *a3
+    include-all: true
+    name: AUTO 🇺🇦
+    type: url-test
+    icon: https://img.icons8.com/color/144/ukraine
+    filter: (?i)乌克兰|Ukraine|\bUKR\b|\bUA\b|🇺🇦
+    hidden: true
+    tolerance: 50
+  - url: https://www.gstatic.com/generate_204
+    interval: 300
+    lazy: true
+    timeout: 5000
+    max-failed-times: 5
+    proxies: *a3
+    include-all: true
+    name: AUTO 🇬🇧
+    type: url-test
+    icon: https://img.icons8.com/color/144/great-britain
+    filter: (?i)英国|United Kingdom|Great Britain|\bUK\b|\bGB\b|🇬🇧
+    hidden: true
+    tolerance: 50
+  - url: https://www.gstatic.com/generate_204
+    interval: 300
+    lazy: true
+    timeout: 5000
+    max-failed-times: 5
+    proxies: *a3
+    include-all: true
+    name: AUTO 🇺🇸
+    type: url-test
+    icon: https://img.icons8.com/color/144/usa
+    filter: (?i)美国|United States of America|United States|\bUSA\b|\bUS\b|🇺🇸
+    hidden: true
+    tolerance: 50
+  - url: https://www.gstatic.com/generate_204
+    interval: 300
+    lazy: true
+    timeout: 5000
+    max-failed-times: 5
+    proxies: *a3
+    include-all: true
+    name: AUTO 🌐
+    type: url-test
+    icon: https://img.icons8.com/?size=144&id=3685&format=png&color=7bbbe9
+    filter: (?i)Global|Cloudflare|\bGL\b|\bCF\b|🌐
+    hidden: true
+    tolerance: 50
+  - url: https://www.gstatic.com/generate_204
+    interval: 300
+    lazy: true
+    timeout: 5000
+    max-failed-times: 5
+    proxies: *a3
+    include-all: true
+    name: FALLBACK 🇦🇷
+    type: fallback
+    icon: https://img.icons8.com/color/144/argentina
+    filter: (?i)阿根廷|Argentina|\bARG\b|\bAR\b|🇦🇷
+    hidden: true
+  - url: https://www.gstatic.com/generate_204
+    interval: 300
+    lazy: true
+    timeout: 5000
+    max-failed-times: 5
+    proxies: *a3
+    include-all: true
+    name: FALLBACK 🇨🇦
+    type: fallback
+    icon: https://img.icons8.com/color/144/canada
+    filter: (?i)加拿大|Canada|\bCAN\b|\bCA\b|🇨🇦
+    hidden: true
+  - url: https://www.gstatic.com/generate_204
+    interval: 300
+    lazy: true
+    timeout: 5000
+    max-failed-times: 5
+    proxies: *a3
+    include-all: true
+    name: FALLBACK 🇫🇮
+    type: fallback
+    icon: https://img.icons8.com/color/144/finland
+    filter: (?i)芬兰|Finland|\bFIN\b|\bFI\b|🇫🇮
+    hidden: true
+  - url: https://www.gstatic.com/generate_204
+    interval: 300
+    lazy: true
+    timeout: 5000
+    max-failed-times: 5
+    proxies: *a3
+    include-all: true
+    name: FALLBACK 🇫🇷
+    type: fallback
+    icon: https://img.icons8.com/color/144/france
+    filter: (?i)法国|France|\bFR\b|🇫🇷
+    hidden: true
+  - url: https://www.gstatic.com/generate_204
+    interval: 300
+    lazy: true
+    timeout: 5000
+    max-failed-times: 5
+    proxies: *a3
+    include-all: true
+    name: FALLBACK 🇩🇪
+    type: fallback
+    icon: https://img.icons8.com/color/144/germany
+    filter: (?i)德国|Germany|\bGER\b|\bDE\b|🇩🇪
+    hidden: true
+  - url: https://www.gstatic.com/generate_204
+    interval: 300
+    lazy: true
+    timeout: 5000
+    max-failed-times: 5
+    proxies: *a3
+    include-all: true
+    name: FALLBACK 🇭🇰
+    type: fallback
+    icon: https://img.icons8.com/color/144/hongkong-circular
+    filter: (?i)香港|Hong Kong|\bHK\b|🇭🇰
+    hidden: true
+  - url: https://www.gstatic.com/generate_204
+    interval: 300
+    lazy: true
+    timeout: 5000
+    max-failed-times: 5
+    proxies: *a3
+    include-all: true
+    name: FALLBACK 🇮🇳
+    type: fallback
+    icon: https://img.icons8.com/color/144/india
+    filter: (?i)印度|India|\bIND\b|\bIN\b|🇮🇳
+    hidden: true
+  - url: https://www.gstatic.com/generate_204
+    interval: 300
+    lazy: true
+    timeout: 5000
+    max-failed-times: 5
+    proxies: *a3
+    include-all: true
+    name: FALLBACK 🇮🇶
+    type: fallback
+    icon: https://img.icons8.com/color/144/iraq
+    filter: (?i)伊拉克|Iraq|\bIQ\b|🇮🇶
+    hidden: true
+  - url: https://www.gstatic.com/generate_204
+    interval: 300
+    lazy: true
+    timeout: 5000
+    max-failed-times: 5
+    proxies: *a3
+    include-all: true
+    name: FALLBACK 🇯🇵
+    type: fallback
+    icon: https://img.icons8.com/color/144/japan
+    filter: (?i)日本|Japan|\bJP\b|🇯🇵
+    hidden: true
+  - url: https://www.gstatic.com/generate_204
+    interval: 300
+    lazy: true
+    timeout: 5000
+    max-failed-times: 5
+    proxies: *a3
+    include-all: true
+    name: FALLBACK 🇰🇷
+    type: fallback
+    icon: https://img.icons8.com/color/144/south-korea
+    filter: (?i)韩国|Korea|\bKR\b|🇰🇷
+    hidden: true
+  - url: https://www.gstatic.com/generate_204
+    interval: 300
+    lazy: true
+    timeout: 5000
+    max-failed-times: 5
+    proxies: *a3
+    include-all: true
+    name: FALLBACK 🇷🇺
+    type: fallback
+    icon: https://img.icons8.com/color/144/russian-federation
+    filter: (?i)俄罗斯|Russia Federation|Russia|\bRU\b|🇷🇺
+    hidden: true
+  - url: https://www.gstatic.com/generate_204
+    interval: 300
+    lazy: true
+    timeout: 5000
+    max-failed-times: 5
+    proxies: *a3
+    include-all: true
+    name: FALLBACK 🇸🇬
+    type: fallback
+    icon: https://img.icons8.com/color/144/singapore
+    filter: (?i)新加坡|Singapore|\bSG\b|🇸🇬
+    hidden: true
+  - url: https://www.gstatic.com/generate_204
+    interval: 300
+    lazy: true
+    timeout: 5000
+    max-failed-times: 5
+    proxies: *a3
+    include-all: true
+    name: FALLBACK 🇨🇳
+    type: fallback
+    icon: https://img.icons8.com/color/144/china-circular
+    filter: (?i)台湾|Taiwan|\bTW\b|🇹🇼
+    hidden: true
+  - url: https://www.gstatic.com/generate_204
+    interval: 300
+    lazy: true
+    timeout: 5000
+    max-failed-times: 5
+    proxies: *a3
+    include-all: true
+    name: FALLBACK 🇹🇭
+    type: fallback
+    icon: https://img.icons8.com/color/144/thailand
+    filter: (?i)泰国|Thailand|\bTH\b|🇹🇭
+    hidden: true
+  - url: https://www.gstatic.com/generate_204
+    interval: 300
+    lazy: true
+    timeout: 5000
+    max-failed-times: 5
+    proxies: *a3
+    include-all: true
+    name: FALLBACK 🇹🇷
+    type: fallback
+    icon: https://img.icons8.com/color/144/turkey
+    filter: (?i)土耳其|Türkiye|Turkey|\bTUR\b|\bTR\b|🇹🇷
+    hidden: true
+  - url: https://www.gstatic.com/generate_204
+    interval: 300
+    lazy: true
+    timeout: 5000
+    max-failed-times: 5
+    proxies: *a3
+    include-all: true
+    name: FALLBACK 🇺🇦
+    type: fallback
+    icon: https://img.icons8.com/color/144/ukraine
+    filter: (?i)乌克兰|Ukraine|\bUKR\b|\bUA\b|🇺🇦
+    hidden: true
+  - url: https://www.gstatic.com/generate_204
+    interval: 300
+    lazy: true
+    timeout: 5000
+    max-failed-times: 5
+    proxies: *a3
+    include-all: true
+    name: FALLBACK 🇬🇧
+    type: fallback
+    icon: https://img.icons8.com/color/144/great-britain
+    filter: (?i)英国|United Kingdom|Great Britain|\bUK\b|\bGB\b|🇬🇧
+    hidden: true
+  - url: https://www.gstatic.com/generate_204
+    interval: 300
+    lazy: true
+    timeout: 5000
+    max-failed-times: 5
+    proxies: *a3
+    include-all: true
+    name: FALLBACK 🇺🇸
+    type: fallback
+    icon: https://img.icons8.com/color/144/usa
+    filter: (?i)美国|United States of America|United States|\bUSA\b|\bUS\b|🇺🇸
+    hidden: true
+  - url: https://www.gstatic.com/generate_204
+    interval: 300
+    lazy: true
+    timeout: 5000
+    max-failed-times: 5
+    proxies: *a3
+    include-all: true
+    name: FALLBACK 🌐
+    type: fallback
+    icon: https://img.icons8.com/?size=144&id=3685&format=png&color=7bbbe9
+    filter: (?i)Global|Cloudflare|\bGL\b|\bCF\b|🌐
+    hidden: true
+  - url: https://www.gstatic.com/generate_204
+    interval: 300
+    lazy: true
+    timeout: 5000
+    max-failed-times: 5
+    proxies: *a3
+    include-all: true
+    name: LOAD BALANCING (round-robin) 🇦🇷
+    type: load-balance
+    icon: https://img.icons8.com/color/144/argentina
+    filter: (?i)阿根廷|Argentina|\bARG\b|\bAR\b|🇦🇷
+    hidden: true
+    strategy: round-robin
+  - url: https://www.gstatic.com/generate_204
+    interval: 300
+    lazy: true
+    timeout: 5000
+    max-failed-times: 5
+    proxies: *a3
+    include-all: true
+    name: LOAD BALANCING (round-robin) 🇨🇦
+    type: load-balance
+    icon: https://img.icons8.com/color/144/canada
+    filter: (?i)加拿大|Canada|\bCAN\b|\bCA\b|🇨🇦
+    hidden: true
+    strategy: round-robin
+  - url: https://www.gstatic.com/generate_204
+    interval: 300
+    lazy: true
+    timeout: 5000
+    max-failed-times: 5
+    proxies: *a3
+    include-all: true
+    name: LOAD BALANCING (round-robin) 🇫🇮
+    type: load-balance
+    icon: https://img.icons8.com/color/144/finland
+    filter: (?i)芬兰|Finland|\bFIN\b|\bFI\b|🇫🇮
+    hidden: true
+    strategy: round-robin
+  - url: https://www.gstatic.com/generate_204
+    interval: 300
+    lazy: true
+    timeout: 5000
+    max-failed-times: 5
+    proxies: *a3
+    include-all: true
+    name: LOAD BALANCING (round-robin) 🇫🇷
+    type: load-balance
+    icon: https://img.icons8.com/color/144/france
+    filter: (?i)法国|France|\bFR\b|🇫🇷
+    hidden: true
+    strategy: round-robin
+  - url: https://www.gstatic.com/generate_204
+    interval: 300
+    lazy: true
+    timeout: 5000
+    max-failed-times: 5
+    proxies: *a3
+    include-all: true
+    name: LOAD BALANCING (round-robin) 🇩🇪
+    type: load-balance
+    icon: https://img.icons8.com/color/144/germany
+    filter: (?i)德国|Germany|\bGER\b|\bDE\b|🇩🇪
+    hidden: true
+    strategy: round-robin
+  - url: https://www.gstatic.com/generate_204
+    interval: 300
+    lazy: true
+    timeout: 5000
+    max-failed-times: 5
+    proxies: *a3
+    include-all: true
+    name: LOAD BALANCING (round-robin) 🇭🇰
+    type: load-balance
+    icon: https://img.icons8.com/color/144/hongkong-circular
+    filter: (?i)香港|Hong Kong|\bHK\b|🇭🇰
+    hidden: true
+    strategy: round-robin
+  - url: https://www.gstatic.com/generate_204
+    interval: 300
+    lazy: true
+    timeout: 5000
+    max-failed-times: 5
+    proxies: *a3
+    include-all: true
+    name: LOAD BALANCING (round-robin) 🇮🇳
+    type: load-balance
+    icon: https://img.icons8.com/color/144/india
+    filter: (?i)印度|India|\bIND\b|\bIN\b|🇮🇳
+    hidden: true
+    strategy: round-robin
+  - url: https://www.gstatic.com/generate_204
+    interval: 300
+    lazy: true
+    timeout: 5000
+    max-failed-times: 5
+    proxies: *a3
+    include-all: true
+    name: LOAD BALANCING (round-robin) 🇮🇶
+    type: load-balance
+    icon: https://img.icons8.com/color/144/iraq
+    filter: (?i)伊拉克|Iraq|\bIQ\b|🇮🇶
+    hidden: true
+    strategy: round-robin
+  - url: https://www.gstatic.com/generate_204
+    interval: 300
+    lazy: true
+    timeout: 5000
+    max-failed-times: 5
+    proxies: *a3
+    include-all: true
+    name: LOAD BALANCING (round-robin) 🇯🇵
+    type: load-balance
+    icon: https://img.icons8.com/color/144/japan
+    filter: (?i)日本|Japan|\bJP\b|🇯🇵
+    hidden: true
+    strategy: round-robin
+  - url: https://www.gstatic.com/generate_204
+    interval: 300
+    lazy: true
+    timeout: 5000
+    max-failed-times: 5
+    proxies: *a3
+    include-all: true
+    name: LOAD BALANCING (round-robin) 🇰🇷
+    type: load-balance
+    icon: https://img.icons8.com/color/144/south-korea
+    filter: (?i)韩国|Korea|\bKR\b|🇰🇷
+    hidden: true
+    strategy: round-robin
+  - url: https://www.gstatic.com/generate_204
+    interval: 300
+    lazy: true
+    timeout: 5000
+    max-failed-times: 5
+    proxies: *a3
+    include-all: true
+    name: LOAD BALANCING (round-robin) 🇷🇺
+    type: load-balance
+    icon: https://img.icons8.com/color/144/russian-federation
+    filter: (?i)俄罗斯|Russia Federation|Russia|\bRU\b|🇷🇺
+    hidden: true
+    strategy: round-robin
+  - url: https://www.gstatic.com/generate_204
+    interval: 300
+    lazy: true
+    timeout: 5000
+    max-failed-times: 5
+    proxies: *a3
+    include-all: true
+    name: LOAD BALANCING (round-robin) 🇸🇬
+    type: load-balance
+    icon: https://img.icons8.com/color/144/singapore
+    filter: (?i)新加坡|Singapore|\bSG\b|🇸🇬
+    hidden: true
+    strategy: round-robin
+  - url: https://www.gstatic.com/generate_204
+    interval: 300
+    lazy: true
+    timeout: 5000
+    max-failed-times: 5
+    proxies: *a3
+    include-all: true
+    name: LOAD BALANCING (round-robin) 🇨🇳
+    type: load-balance
+    icon: https://img.icons8.com/color/144/china-circular
+    filter: (?i)台湾|Taiwan|\bTW\b|🇹🇼
+    hidden: true
+    strategy: round-robin
+  - url: https://www.gstatic.com/generate_204
+    interval: 300
+    lazy: true
+    timeout: 5000
+    max-failed-times: 5
+    proxies: *a3
+    include-all: true
+    name: LOAD BALANCING (round-robin) 🇹🇭
+    type: load-balance
+    icon: https://img.icons8.com/color/144/thailand
+    filter: (?i)泰国|Thailand|\bTH\b|🇹🇭
+    hidden: true
+    strategy: round-robin
+  - url: https://www.gstatic.com/generate_204
+    interval: 300
+    lazy: true
+    timeout: 5000
+    max-failed-times: 5
+    proxies: *a3
+    include-all: true
+    name: LOAD BALANCING (round-robin) 🇹🇷
+    type: load-balance
+    icon: https://img.icons8.com/color/144/turkey
+    filter: (?i)土耳其|Türkiye|Turkey|\bTUR\b|\bTR\b|🇹🇷
+    hidden: true
+    strategy: round-robin
+  - url: https://www.gstatic.com/generate_204
+    interval: 300
+    lazy: true
+    timeout: 5000
+    max-failed-times: 5
+    proxies: *a3
+    include-all: true
+    name: LOAD BALANCING (round-robin) 🇺🇦
+    type: load-balance
+    icon: https://img.icons8.com/color/144/ukraine
+    filter: (?i)乌克兰|Ukraine|\bUKR\b|\bUA\b|🇺🇦
+    hidden: true
+    strategy: round-robin
+  - url: https://www.gstatic.com/generate_204
+    interval: 300
+    lazy: true
+    timeout: 5000
+    max-failed-times: 5
+    proxies: *a3
+    include-all: true
+    name: LOAD BALANCING (round-robin) 🇬🇧
+    type: load-balance
+    icon: https://img.icons8.com/color/144/great-britain
+    filter: (?i)英国|United Kingdom|Great Britain|\bUK\b|\bGB\b|🇬🇧
+    hidden: true
+    strategy: round-robin
+  - url: https://www.gstatic.com/generate_204
+    interval: 300
+    lazy: true
+    timeout: 5000
+    max-failed-times: 5
+    proxies: *a3
+    include-all: true
+    name: LOAD BALANCING (round-robin) 🇺🇸
+    type: load-balance
+    icon: https://img.icons8.com/color/144/usa
+    filter: (?i)美国|United States of America|United States|\bUSA\b|\bUS\b|🇺🇸
+    hidden: true
+    strategy: round-robin
+  - url: https://www.gstatic.com/generate_204
+    interval: 300
+    lazy: true
+    timeout: 5000
+    max-failed-times: 5
+    proxies: *a3
+    include-all: true
+    name: LOAD BALANCING (round-robin) 🌐
+    type: load-balance
+    icon: https://img.icons8.com/?size=144&id=3685&format=png&color=7bbbe9
+    filter: (?i)Global|Cloudflare|\bGL\b|\bCF\b|🌐
+    hidden: true
+    strategy: round-robin
+  - url: https://www.gstatic.com/generate_204
+    interval: 300
+    lazy: true
+    timeout: 5000
+    max-failed-times: 5
+    proxies: *a3
+    include-all: true
+    name: LOAD BALANCING (consistent hashing) 🇦🇷
+    type: load-balance
+    icon: https://img.icons8.com/color/144/argentina
+    filter: (?i)阿根廷|Argentina|\bARG\b|\bAR\b|🇦🇷
+    hidden: true
+    strategy: consistent-hashing
+  - url: https://www.gstatic.com/generate_204
+    interval: 300
+    lazy: true
+    timeout: 5000
+    max-failed-times: 5
+    proxies: *a3
+    include-all: true
+    name: LOAD BALANCING (consistent hashing) 🇨🇦
+    type: load-balance
+    icon: https://img.icons8.com/color/144/canada
+    filter: (?i)加拿大|Canada|\bCAN\b|\bCA\b|🇨🇦
+    hidden: true
+    strategy: consistent-hashing
+  - url: https://www.gstatic.com/generate_204
+    interval: 300
+    lazy: true
+    timeout: 5000
+    max-failed-times: 5
+    proxies: *a3
+    include-all: true
+    name: LOAD BALANCING (consistent hashing) 🇫🇮
+    type: load-balance
+    icon: https://img.icons8.com/color/144/finland
+    filter: (?i)芬兰|Finland|\bFIN\b|\bFI\b|🇫🇮
+    hidden: true
+    strategy: consistent-hashing
+  - url: https://www.gstatic.com/generate_204
+    interval: 300
+    lazy: true
+    timeout: 5000
+    max-failed-times: 5
+    proxies: *a3
+    include-all: true
+    name: LOAD BALANCING (consistent hashing) 🇫🇷
+    type: load-balance
+    icon: https://img.icons8.com/color/144/france
+    filter: (?i)法国|France|\bFR\b|🇫🇷
+    hidden: true
+    strategy: consistent-hashing
+  - url: https://www.gstatic.com/generate_204
+    interval: 300
+    lazy: true
+    timeout: 5000
+    max-failed-times: 5
+    proxies: *a3
+    include-all: true
+    name: LOAD BALANCING (consistent hashing) 🇩🇪
+    type: load-balance
+    icon: https://img.icons8.com/color/144/germany
+    filter: (?i)德国|Germany|\bGER\b|\bDE\b|🇩🇪
+    hidden: true
+    strategy: consistent-hashing
+  - url: https://www.gstatic.com/generate_204
+    interval: 300
+    lazy: true
+    timeout: 5000
+    max-failed-times: 5
+    proxies: *a3
+    include-all: true
+    name: LOAD BALANCING (consistent hashing) 🇭🇰
+    type: load-balance
+    icon: https://img.icons8.com/color/144/hongkong-circular
+    filter: (?i)香港|Hong Kong|\bHK\b|🇭🇰
+    hidden: true
+    strategy: consistent-hashing
+  - url: https://www.gstatic.com/generate_204
+    interval: 300
+    lazy: true
+    timeout: 5000
+    max-failed-times: 5
+    proxies: *a3
+    include-all: true
+    name: LOAD BALANCING (consistent hashing) 🇮🇳
+    type: load-balance
+    icon: https://img.icons8.com/color/144/india
+    filter: (?i)印度|India|\bIND\b|\bIN\b|🇮🇳
+    hidden: true
+    strategy: consistent-hashing
+  - url: https://www.gstatic.com/generate_204
+    interval: 300
+    lazy: true
+    timeout: 5000
+    max-failed-times: 5
+    proxies: *a3
+    include-all: true
+    name: LOAD BALANCING (consistent hashing) 🇮🇶
+    type: load-balance
+    icon: https://img.icons8.com/color/144/iraq
+    filter: (?i)伊拉克|Iraq|\bIQ\b|🇮🇶
+    hidden: true
+    strategy: consistent-hashing
+  - url: https://www.gstatic.com/generate_204
+    interval: 300
+    lazy: true
+    timeout: 5000
+    max-failed-times: 5
+    proxies: *a3
+    include-all: true
+    name: LOAD BALANCING (consistent hashing) 🇯🇵
+    type: load-balance
+    icon: https://img.icons8.com/color/144/japan
+    filter: (?i)日本|Japan|\bJP\b|🇯🇵
+    hidden: true
+    strategy: consistent-hashing
+  - url: https://www.gstatic.com/generate_204
+    interval: 300
+    lazy: true
+    timeout: 5000
+    max-failed-times: 5
+    proxies: *a3
+    include-all: true
+    name: LOAD BALANCING (consistent hashing) 🇰🇷
+    type: load-balance
+    icon: https://img.icons8.com/color/144/south-korea
+    filter: (?i)韩国|Korea|\bKR\b|🇰🇷
+    hidden: true
+    strategy: consistent-hashing
+  - url: https://www.gstatic.com/generate_204
+    interval: 300
+    lazy: true
+    timeout: 5000
+    max-failed-times: 5
+    proxies: *a3
+    include-all: true
+    name: LOAD BALANCING (consistent hashing) 🇷🇺
+    type: load-balance
+    icon: https://img.icons8.com/color/144/russian-federation
+    filter: (?i)俄罗斯|Russia Federation|Russia|\bRU\b|🇷🇺
+    hidden: true
+    strategy: consistent-hashing
+  - url: https://www.gstatic.com/generate_204
+    interval: 300
+    lazy: true
+    timeout: 5000
+    max-failed-times: 5
+    proxies: *a3
+    include-all: true
+    name: LOAD BALANCING (consistent hashing) 🇸🇬
+    type: load-balance
+    icon: https://img.icons8.com/color/144/singapore
+    filter: (?i)新加坡|Singapore|\bSG\b|🇸🇬
+    hidden: true
+    strategy: consistent-hashing
+  - url: https://www.gstatic.com/generate_204
+    interval: 300
+    lazy: true
+    timeout: 5000
+    max-failed-times: 5
+    proxies: *a3
+    include-all: true
+    name: LOAD BALANCING (consistent hashing) 🇨🇳
+    type: load-balance
+    icon: https://img.icons8.com/color/144/china-circular
+    filter: (?i)台湾|Taiwan|\bTW\b|🇹🇼
+    hidden: true
+    strategy: consistent-hashing
+  - url: https://www.gstatic.com/generate_204
+    interval: 300
+    lazy: true
+    timeout: 5000
+    max-failed-times: 5
+    proxies: *a3
+    include-all: true
+    name: LOAD BALANCING (consistent hashing) 🇹🇭
+    type: load-balance
+    icon: https://img.icons8.com/color/144/thailand
+    filter: (?i)泰国|Thailand|\bTH\b|🇹🇭
+    hidden: true
+    strategy: consistent-hashing
+  - url: https://www.gstatic.com/generate_204
+    interval: 300
+    lazy: true
+    timeout: 5000
+    max-failed-times: 5
+    proxies: *a3
+    include-all: true
+    name: LOAD BALANCING (consistent hashing) 🇹🇷
+    type: load-balance
+    icon: https://img.icons8.com/color/144/turkey
+    filter: (?i)土耳其|Türkiye|Turkey|\bTUR\b|\bTR\b|🇹🇷
+    hidden: true
+    strategy: consistent-hashing
+  - url: https://www.gstatic.com/generate_204
+    interval: 300
+    lazy: true
+    timeout: 5000
+    max-failed-times: 5
+    proxies: *a3
+    include-all: true
+    name: LOAD BALANCING (consistent hashing) 🇺🇦
+    type: load-balance
+    icon: https://img.icons8.com/color/144/ukraine
+    filter: (?i)乌克兰|Ukraine|\bUKR\b|\bUA\b|🇺🇦
+    hidden: true
+    strategy: consistent-hashing
+  - url: https://www.gstatic.com/generate_204
+    interval: 300
+    lazy: true
+    timeout: 5000
+    max-failed-times: 5
+    proxies: *a3
+    include-all: true
+    name: LOAD BALANCING (consistent hashing) 🇬🇧
+    type: load-balance
+    icon: https://img.icons8.com/color/144/great-britain
+    filter: (?i)英国|United Kingdom|Great Britain|\bUK\b|\bGB\b|🇬🇧
+    hidden: true
+    strategy: consistent-hashing
+  - url: https://www.gstatic.com/generate_204
+    interval: 300
+    lazy: true
+    timeout: 5000
+    max-failed-times: 5
+    proxies: *a3
+    include-all: true
+    name: LOAD BALANCING (consistent hashing) 🇺🇸
+    type: load-balance
+    icon: https://img.icons8.com/color/144/usa
+    filter: (?i)美国|United States of America|United States|\bUSA\b|\bUS\b|🇺🇸
+    hidden: true
+    strategy: consistent-hashing
+  - url: https://www.gstatic.com/generate_204
+    interval: 300
+    lazy: true
+    timeout: 5000
+    max-failed-times: 5
+    proxies: *a3
+    include-all: true
+    name: LOAD BALANCING (consistent hashing) 🌐
+    type: load-balance
+    icon: https://img.icons8.com/?size=144&id=3685&format=png&color=7bbbe9
+    filter: (?i)Global|Cloudflare|\bGL\b|\bCF\b|🌐
+    hidden: true
+    strategy: consistent-hashing
+  - url: https://www.gstatic.com/generate_204
+    interval: 300
+    lazy: true
+    timeout: 5000
+    max-failed-times: 5
+    proxies: *a3
+    include-all: true
+    name: LOAD BALANCING (sticky sessions) 🇦🇷
+    type: load-balance
+    icon: https://img.icons8.com/color/144/argentina
+    filter: (?i)阿根廷|Argentina|\bARG\b|\bAR\b|🇦🇷
+    hidden: true
+    strategy: sticky-sessions
+  - url: https://www.gstatic.com/generate_204
+    interval: 300
+    lazy: true
+    timeout: 5000
+    max-failed-times: 5
+    proxies: *a3
+    include-all: true
+    name: LOAD BALANCING (sticky sessions) 🇨🇦
+    type: load-balance
+    icon: https://img.icons8.com/color/144/canada
+    filter: (?i)加拿大|Canada|\bCAN\b|\bCA\b|🇨🇦
+    hidden: true
+    strategy: sticky-sessions
+  - url: https://www.gstatic.com/generate_204
+    interval: 300
+    lazy: true
+    timeout: 5000
+    max-failed-times: 5
+    proxies: *a3
+    include-all: true
+    name: LOAD BALANCING (sticky sessions) 🇫🇮
+    type: load-balance
+    icon: https://img.icons8.com/color/144/finland
+    filter: (?i)芬兰|Finland|\bFIN\b|\bFI\b|🇫🇮
+    hidden: true
+    strategy: sticky-sessions
+  - url: https://www.gstatic.com/generate_204
+    interval: 300
+    lazy: true
+    timeout: 5000
+    max-failed-times: 5
+    proxies: *a3
+    include-all: true
+    name: LOAD BALANCING (sticky sessions) 🇫🇷
+    type: load-balance
+    icon: https://img.icons8.com/color/144/france
+    filter: (?i)法国|France|\bFR\b|🇫🇷
+    hidden: true
+    strategy: sticky-sessions
+  - url: https://www.gstatic.com/generate_204
+    interval: 300
+    lazy: true
+    timeout: 5000
+    max-failed-times: 5
+    proxies: *a3
+    include-all: true
+    name: LOAD BALANCING (sticky sessions) 🇩🇪
+    type: load-balance
+    icon: https://img.icons8.com/color/144/germany
+    filter: (?i)德国|Germany|\bGER\b|\bDE\b|🇩🇪
+    hidden: true
+    strategy: sticky-sessions
+  - url: https://www.gstatic.com/generate_204
+    interval: 300
+    lazy: true
+    timeout: 5000
+    max-failed-times: 5
+    proxies: *a3
+    include-all: true
+    name: LOAD BALANCING (sticky sessions) 🇭🇰
+    type: load-balance
+    icon: https://img.icons8.com/color/144/hongkong-circular
+    filter: (?i)香港|Hong Kong|\bHK\b|🇭🇰
+    hidden: true
+    strategy: sticky-sessions
+  - url: https://www.gstatic.com/generate_204
+    interval: 300
+    lazy: true
+    timeout: 5000
+    max-failed-times: 5
+    proxies: *a3
+    include-all: true
+    name: LOAD BALANCING (sticky sessions) 🇮🇳
+    type: load-balance
+    icon: https://img.icons8.com/color/144/india
+    filter: (?i)印度|India|\bIND\b|\bIN\b|🇮🇳
+    hidden: true
+    strategy: sticky-sessions
+  - url: https://www.gstatic.com/generate_204
+    interval: 300
+    lazy: true
+    timeout: 5000
+    max-failed-times: 5
+    proxies: *a3
+    include-all: true
+    name: LOAD BALANCING (sticky sessions) 🇮🇶
+    type: load-balance
+    icon: https://img.icons8.com/color/144/iraq
+    filter: (?i)伊拉克|Iraq|\bIQ\b|🇮🇶
+    hidden: true
+    strategy: sticky-sessions
+  - url: https://www.gstatic.com/generate_204
+    interval: 300
+    lazy: true
+    timeout: 5000
+    max-failed-times: 5
+    proxies: *a3
+    include-all: true
+    name: LOAD BALANCING (sticky sessions) 🇯🇵
+    type: load-balance
+    icon: https://img.icons8.com/color/144/japan
+    filter: (?i)日本|Japan|\bJP\b|🇯🇵
+    hidden: true
+    strategy: sticky-sessions
+  - url: https://www.gstatic.com/generate_204
+    interval: 300
+    lazy: true
+    timeout: 5000
+    max-failed-times: 5
+    proxies: *a3
+    include-all: true
+    name: LOAD BALANCING (sticky sessions) 🇰🇷
+    type: load-balance
+    icon: https://img.icons8.com/color/144/south-korea
+    filter: (?i)韩国|Korea|\bKR\b|🇰🇷
+    hidden: true
+    strategy: sticky-sessions
+  - url: https://www.gstatic.com/generate_204
+    interval: 300
+    lazy: true
+    timeout: 5000
+    max-failed-times: 5
+    proxies: *a3
+    include-all: true
+    name: LOAD BALANCING (sticky sessions) 🇷🇺
+    type: load-balance
+    icon: https://img.icons8.com/color/144/russian-federation
+    filter: (?i)俄罗斯|Russia Federation|Russia|\bRU\b|🇷🇺
+    hidden: true
+    strategy: sticky-sessions
+  - url: https://www.gstatic.com/generate_204
+    interval: 300
+    lazy: true
+    timeout: 5000
+    max-failed-times: 5
+    proxies: *a3
+    include-all: true
+    name: LOAD BALANCING (sticky sessions) 🇸🇬
+    type: load-balance
+    icon: https://img.icons8.com/color/144/singapore
+    filter: (?i)新加坡|Singapore|\bSG\b|🇸🇬
+    hidden: true
+    strategy: sticky-sessions
+  - url: https://www.gstatic.com/generate_204
+    interval: 300
+    lazy: true
+    timeout: 5000
+    max-failed-times: 5
+    proxies: *a3
+    include-all: true
+    name: LOAD BALANCING (sticky sessions) 🇨🇳
+    type: load-balance
+    icon: https://img.icons8.com/color/144/china-circular
+    filter: (?i)台湾|Taiwan|\bTW\b|🇹🇼
+    hidden: true
+    strategy: sticky-sessions
+  - url: https://www.gstatic.com/generate_204
+    interval: 300
+    lazy: true
+    timeout: 5000
+    max-failed-times: 5
+    proxies: *a3
+    include-all: true
+    name: LOAD BALANCING (sticky sessions) 🇹🇭
+    type: load-balance
+    icon: https://img.icons8.com/color/144/thailand
+    filter: (?i)泰国|Thailand|\bTH\b|🇹🇭
+    hidden: true
+    strategy: sticky-sessions
+  - url: https://www.gstatic.com/generate_204
+    interval: 300
+    lazy: true
+    timeout: 5000
+    max-failed-times: 5
+    proxies: *a3
+    include-all: true
+    name: LOAD BALANCING (sticky sessions) 🇹🇷
+    type: load-balance
+    icon: https://img.icons8.com/color/144/turkey
+    filter: (?i)土耳其|Türkiye|Turkey|\bTUR\b|\bTR\b|🇹🇷
+    hidden: true
+    strategy: sticky-sessions
+  - url: https://www.gstatic.com/generate_204
+    interval: 300
+    lazy: true
+    timeout: 5000
+    max-failed-times: 5
+    proxies: *a3
+    include-all: true
+    name: LOAD BALANCING (sticky sessions) 🇺🇦
+    type: load-balance
+    icon: https://img.icons8.com/color/144/ukraine
+    filter: (?i)乌克兰|Ukraine|\bUKR\b|\bUA\b|🇺🇦
+    hidden: true
+    strategy: sticky-sessions
+  - url: https://www.gstatic.com/generate_204
+    interval: 300
+    lazy: true
+    timeout: 5000
+    max-failed-times: 5
+    proxies: *a3
+    include-all: true
+    name: LOAD BALANCING (sticky sessions) 🇬🇧
+    type: load-balance
+    icon: https://img.icons8.com/color/144/great-britain
+    filter: (?i)英国|United Kingdom|Great Britain|\bUK\b|\bGB\b|🇬🇧
+    hidden: true
+    strategy: sticky-sessions
+  - url: https://www.gstatic.com/generate_204
+    interval: 300
+    lazy: true
+    timeout: 5000
+    max-failed-times: 5
+    proxies: *a3
+    include-all: true
+    name: LOAD BALANCING (sticky sessions) 🇺🇸
+    type: load-balance
+    icon: https://img.icons8.com/color/144/usa
+    filter: (?i)美国|United States of America|United States|\bUSA\b|\bUS\b|🇺🇸
+    hidden: true
+    strategy: sticky-sessions
+  - url: https://www.gstatic.com/generate_204
+    interval: 300
+    lazy: true
+    timeout: 5000
+    max-failed-times: 5
+    proxies: *a3
+    include-all: true
+    name: LOAD BALANCING (sticky sessions) 🌐
+    type: load-balance
+    icon: https://img.icons8.com/?size=144&id=3685&format=png&color=7bbbe9
+    filter: (?i)Global|Cloudflare|\bGL\b|\bCF\b|🌐
+    hidden: true
+    strategy: sticky-sessions
+  - url: https://www.gstatic.com/generate_204
+    interval: 300
+    lazy: true
+    timeout: 5000
+    max-failed-times: 5
+    name: Argentina 🇦🇷
+    type: select
+    icon: https://img.icons8.com/color/144/argentina
+    proxies:
+      - LOAD BALANCING (consistent hashing) 🇦🇷
+      - LOAD BALANCING (round-robin) 🇦🇷
+      - LOAD BALANCING (sticky sessions) 🇦🇷
+      - FALLBACK 🇦🇷
+      - AUTO 🇦🇷
+  - url: https://www.gstatic.com/generate_204
+    interval: 300
+    lazy: true
+    timeout: 5000
+    max-failed-times: 5
+    name: Canada 🇨🇦
+    type: select
+    icon: https://img.icons8.com/color/144/canada
+    proxies:
+      - LOAD BALANCING (consistent hashing) 🇨🇦
+      - LOAD BALANCING (round-robin) 🇨🇦
+      - LOAD BALANCING (sticky sessions) 🇨🇦
+      - FALLBACK 🇨🇦
+      - AUTO 🇨🇦
+  - url: https://www.gstatic.com/generate_204
+    interval: 300
+    lazy: true
+    timeout: 5000
+    max-failed-times: 5
+    name: Finland 🇫🇮
+    type: select
+    icon: https://img.icons8.com/color/144/finland
+    proxies:
+      - LOAD BALANCING (consistent hashing) 🇫🇮
+      - LOAD BALANCING (round-robin) 🇫🇮
+      - LOAD BALANCING (sticky sessions) 🇫🇮
+      - FALLBACK 🇫🇮
+      - AUTO 🇫🇮
+  - url: https://www.gstatic.com/generate_204
+    interval: 300
+    lazy: true
+    timeout: 5000
+    max-failed-times: 5
+    name: France 🇫🇷
+    type: select
+    icon: https://img.icons8.com/color/144/france
+    proxies:
+      - LOAD BALANCING (consistent hashing) 🇫🇷
+      - LOAD BALANCING (round-robin) 🇫🇷
+      - LOAD BALANCING (sticky sessions) 🇫🇷
+      - FALLBACK 🇫🇷
+      - AUTO 🇫🇷
+  - url: https://www.gstatic.com/generate_204
+    interval: 300
+    lazy: true
+    timeout: 5000
+    max-failed-times: 5
+    name: Germany 🇩🇪
+    type: select
+    icon: https://img.icons8.com/color/144/germany
+    proxies:
+      - LOAD BALANCING (consistent hashing) 🇩🇪
+      - LOAD BALANCING (round-robin) 🇩🇪
+      - LOAD BALANCING (sticky sessions) 🇩🇪
+      - FALLBACK 🇩🇪
+      - AUTO 🇩🇪
+  - url: https://www.gstatic.com/generate_204
+    interval: 300
+    lazy: true
+    timeout: 5000
+    max-failed-times: 5
+    name: Hong Kong, China 🇭🇰
+    type: select
+    icon: https://img.icons8.com/color/144/hongkong-circular
+    proxies:
+      - LOAD BALANCING (consistent hashing) 🇭🇰
+      - LOAD BALANCING (round-robin) 🇭🇰
+      - LOAD BALANCING (sticky sessions) 🇭🇰
+      - FALLBACK 🇭🇰
+      - AUTO 🇭🇰
+  - url: https://www.gstatic.com/generate_204
+    interval: 300
+    lazy: true
+    timeout: 5000
+    max-failed-times: 5
+    name: India 🇮🇳
+    type: select
+    icon: https://img.icons8.com/color/144/india
+    proxies:
+      - LOAD BALANCING (consistent hashing) 🇮🇳
+      - LOAD BALANCING (round-robin) 🇮🇳
+      - LOAD BALANCING (sticky sessions) 🇮🇳
+      - FALLBACK 🇮🇳
+      - AUTO 🇮🇳
+  - url: https://www.gstatic.com/generate_204
+    interval: 300
+    lazy: true
+    timeout: 5000
+    max-failed-times: 5
+    name: Iraq 🇮🇶
+    type: select
+    icon: https://img.icons8.com/color/144/iraq
+    proxies:
+      - LOAD BALANCING (consistent hashing) 🇮🇶
+      - LOAD BALANCING (round-robin) 🇮🇶
+      - LOAD BALANCING (sticky sessions) 🇮🇶
+      - FALLBACK 🇮🇶
+      - AUTO 🇮🇶
+  - url: https://www.gstatic.com/generate_204
+    interval: 300
+    lazy: true
+    timeout: 5000
+    max-failed-times: 5
+    name: Japan 🇯🇵
+    type: select
+    icon: https://img.icons8.com/color/144/japan
+    proxies:
+      - LOAD BALANCING (consistent hashing) 🇯🇵
+      - LOAD BALANCING (round-robin) 🇯🇵
+      - LOAD BALANCING (sticky sessions) 🇯🇵
+      - FALLBACK 🇯🇵
+      - AUTO 🇯🇵
+  - url: https://www.gstatic.com/generate_204
+    interval: 300
+    lazy: true
+    timeout: 5000
+    max-failed-times: 5
+    name: Korea 🇰🇷
+    type: select
+    icon: https://img.icons8.com/color/144/south-korea
+    proxies:
+      - LOAD BALANCING (consistent hashing) 🇰🇷
+      - LOAD BALANCING (round-robin) 🇰🇷
+      - LOAD BALANCING (sticky sessions) 🇰🇷
+      - FALLBACK 🇰🇷
+      - AUTO 🇰🇷
+  - url: https://www.gstatic.com/generate_204
+    interval: 300
+    lazy: true
+    timeout: 5000
+    max-failed-times: 5
+    name: Russia 🇷🇺
+    type: select
+    icon: https://img.icons8.com/color/144/russian-federation
+    proxies:
+      - LOAD BALANCING (consistent hashing) 🇷🇺
+      - LOAD BALANCING (round-robin) 🇷🇺
+      - LOAD BALANCING (sticky sessions) 🇷🇺
+      - FALLBACK 🇷🇺
+      - AUTO 🇷🇺
+  - url: https://www.gstatic.com/generate_204
+    interval: 300
+    lazy: true
+    timeout: 5000
+    max-failed-times: 5
+    name: Singapore 🇸🇬
+    type: select
+    icon: https://img.icons8.com/color/144/singapore
+    proxies:
+      - LOAD BALANCING (consistent hashing) 🇸🇬
+      - LOAD BALANCING (round-robin) 🇸🇬
+      - LOAD BALANCING (sticky sessions) 🇸🇬
+      - FALLBACK 🇸🇬
+      - AUTO 🇸🇬
+  - url: https://www.gstatic.com/generate_204
+    interval: 300
+    lazy: true
+    timeout: 5000
+    max-failed-times: 5
+    name: Taiwan, China 🇨🇳
+    type: select
+    icon: https://img.icons8.com/color/144/china-circular
+    proxies:
+      - LOAD BALANCING (consistent hashing) 🇨🇳
+      - LOAD BALANCING (round-robin) 🇨🇳
+      - LOAD BALANCING (sticky sessions) 🇨🇳
+      - FALLBACK 🇨🇳
+      - AUTO 🇨🇳
+  - url: https://www.gstatic.com/generate_204
+    interval: 300
+    lazy: true
+    timeout: 5000
+    max-failed-times: 5
+    name: Thailand 🇹🇭
+    type: select
+    icon: https://img.icons8.com/color/144/thailand
+    proxies:
+      - LOAD BALANCING (consistent hashing) 🇹🇭
+      - LOAD BALANCING (round-robin) 🇹🇭
+      - LOAD BALANCING (sticky sessions) 🇹🇭
+      - FALLBACK 🇹🇭
+      - AUTO 🇹🇭
+  - url: https://www.gstatic.com/generate_204
+    interval: 300
+    lazy: true
+    timeout: 5000
+    max-failed-times: 5
+    name: Türkiye 🇹🇷
+    type: select
+    icon: https://img.icons8.com/color/144/turkey
+    proxies:
+      - LOAD BALANCING (consistent hashing) 🇹🇷
+      - LOAD BALANCING (round-robin) 🇹🇷
+      - LOAD BALANCING (sticky sessions) 🇹🇷
+      - FALLBACK 🇹🇷
+      - AUTO 🇹🇷
+  - url: https://www.gstatic.com/generate_204
+    interval: 300
+    lazy: true
+    timeout: 5000
+    max-failed-times: 5
+    name: Ukraine 🇺🇦
+    type: select
+    icon: https://img.icons8.com/color/144/ukraine
+    proxies:
+      - LOAD BALANCING (consistent hashing) 🇺🇦
+      - LOAD BALANCING (round-robin) 🇺🇦
+      - LOAD BALANCING (sticky sessions) 🇺🇦
+      - FALLBACK 🇺🇦
+      - AUTO 🇺🇦
+  - url: https://www.gstatic.com/generate_204
+    interval: 300
+    lazy: true
+    timeout: 5000
+    max-failed-times: 5
+    name: United Kingdom 🇬🇧
+    type: select
+    icon: https://img.icons8.com/color/144/great-britain
+    proxies:
+      - LOAD BALANCING (consistent hashing) 🇬🇧
+      - LOAD BALANCING (round-robin) 🇬🇧
+      - LOAD BALANCING (sticky sessions) 🇬🇧
+      - FALLBACK 🇬🇧
+      - AUTO 🇬🇧
+  - url: https://www.gstatic.com/generate_204
+    interval: 300
+    lazy: true
+    timeout: 5000
+    max-failed-times: 5
+    name: United States 🇺🇸
+    type: select
+    icon: https://img.icons8.com/color/144/usa
+    proxies:
+      - LOAD BALANCING (consistent hashing) 🇺🇸
+      - LOAD BALANCING (round-robin) 🇺🇸
+      - LOAD BALANCING (sticky sessions) 🇺🇸
+      - FALLBACK 🇺🇸
+      - AUTO 🇺🇸
+  - url: https://www.gstatic.com/generate_204
+    interval: 300
+    lazy: true
+    timeout: 5000
+    max-failed-times: 5
+    name: Global 🌐
+    type: select
+    icon: https://img.icons8.com/?size=144&id=3685&format=png&color=7bbbe9
+    proxies:
+      - LOAD BALANCING (consistent hashing) 🌐
+      - LOAD BALANCING (round-robin) 🌐
+      - LOAD BALANCING (sticky sessions) 🌐
+      - FALLBACK 🌐
+      - AUTO 🌐
+rules:
+  - RULE-SET,applications,DIRECT
+  - RULE-SET,win-phonelink,DIRECT
+  - RULE-SET,lancidr,DIRECT,no-resolve
+  - RULE-SET,private,DIRECT
+  - RULE-SET,bilibili,bilibili
+  - RULE-SET,netflix,Netflix
+  - RULE-SET,youtube,YouTube
+  - RULE-SET,anthropic,Anthropic
+  - RULE-SET,gemini,Gemini
+  - RULE-SET,openai,OpenAI
+  - RULE-SET,douyin,Douyin
+  - RULE-SET,rednote,rednote
+  - RULE-SET,telegram,Telegram
+  - RULE-SET,truthsocial,Truth Social
+  - RULE-SET,x,X
+  - RULE-SET,binance,Binance
+  - RULE-SET,bybit,Bybit
+  - RULE-SET,okx,OKX
+  - RULE-SET,apple,Apple
+  - RULE-SET,google,Google
+  - RULE-SET,microsoft,Microsoft
+  - RULE-SET,speedtest,Speedtest
+  - RULE-SET,xget,Xget
+  - RULE-SET,cloudflare,Cloudflare
+  - RULE-SET,reject,Advertising
+  - RULE-SET,win-spy,Advertising
+  - RULE-SET,direct,Domestic
+  - RULE-SET,proxy,PROXY
+  - RULE-SET,telegramcidr,Telegram
+  - RULE-SET,xcidr,X
+  - RULE-SET,googlecidr,Google
+  - RULE-SET,cloudflarecidr,Cloudflare
+  - RULE-SET,cncidr,Domestic
+  - MATCH,Others
+rule-providers:
+  fake-ip-filter:
+    type: http
+    interval: 14400
+    format: mrs
+    behavior: domain
+    url: https://cdn.jsdelivr.net/gh/xixu-me/RFM@basic/fake-ip-filter.mrs
+    path: ./rulesets/fake-ip-filter.mrs
+  connectivity-check:
+    type: http
+    interval: 14400
+    format: mrs
+    behavior: domain
+    url: https://cdn.jsdelivr.net/gh/xixu-me/RFM@universal/connectivity-check.mrs
+    path: ./rulesets/connectivity-check.mrs
+  applications:
+    type: http
+    interval: 14400
+    format: yaml
+    behavior: classical
+    url: https://cdn.jsdelivr.net/gh/xixu-me/RFM@basic/applications.yaml
+    path: ./rulesets/applications.yaml
+  win-phonelink:
+    type: http
+    interval: 14400
+    format: yaml
+    behavior: classical
+    url: https://cdn.jsdelivr.net/gh/xixu-me/RFM@fixed/win-phonelink.yaml
+    path: ./rulesets/win-phonelink.yaml
+  lancidr:
+    type: http
+    interval: 14400
+    format: mrs
+    behavior: ipcidr
+    url: https://cdn.jsdelivr.net/gh/xixu-me/RFM@basic/lancidr.mrs
+    path: ./rulesets/lancidr.mrs
+  cncidr:
+    type: http
+    interval: 14400
+    format: mrs
+    behavior: ipcidr
+    url: https://cdn.jsdelivr.net/gh/xixu-me/RFM@basic/cncidr.mrs
+    path: ./rulesets/cncidr.mrs
+  cloudflarecidr:
+    type: http
+    interval: 14400
+    format: mrs
+    behavior: ipcidr
+    url: https://cdn.jsdelivr.net/gh/xixu-me/RFM@basic/cloudflarecidr.mrs
+    path: ./rulesets/cloudflarecidr.mrs
+  googlecidr:
+    type: http
+    interval: 14400
+    format: mrs
+    behavior: ipcidr
+    url: https://cdn.jsdelivr.net/gh/xixu-me/RFM@basic/googlecidr.mrs
+    path: ./rulesets/googlecidr.mrs
+  telegramcidr:
+    type: http
+    interval: 14400
+    format: mrs
+    behavior: ipcidr
+    url: https://cdn.jsdelivr.net/gh/xixu-me/RFM@basic/telegramcidr.mrs
+    path: ./rulesets/telegramcidr.mrs
+  xcidr:
+    type: http
+    interval: 14400
+    format: mrs
+    behavior: ipcidr
+    url: https://cdn.jsdelivr.net/gh/xixu-me/RFM@basic/xcidr.mrs
+    path: ./rulesets/xcidr.mrs
+  private:
+    type: http
+    interval: 14400
+    format: mrs
+    behavior: domain
+    url: https://cdn.jsdelivr.net/gh/xixu-me/RFM@basic/private.mrs
+    path: ./rulesets/private.mrs
+  direct:
+    type: http
+    interval: 14400
+    format: mrs
+    behavior: domain
+    url: https://cdn.jsdelivr.net/gh/xixu-me/RFM@basic/direct.mrs
+    path: ./rulesets/direct.mrs
+  proxy:
+    type: http
+    interval: 14400
+    format: mrs
+    behavior: domain
+    url: https://cdn.jsdelivr.net/gh/xixu-me/RFM@basic/proxy.mrs
+    path: ./rulesets/proxy.mrs
+  geolocation-cn:
+    type: http
+    interval: 14400
+    format: mrs
+    behavior: domain
+    url: https://cdn.jsdelivr.net/gh/xixu-me/RFM@universal/geolocation-cn.mrs
+    path: ./rulesets/geolocation-cn.mrs
+  reject:
+    type: http
+    interval: 14400
+    format: mrs
+    behavior: domain
+    url: https://cdn.jsdelivr.net/gh/xixu-me/RFM@basic/reject.mrs
+    path: ./rulesets/reject.mrs
+  win-spy:
+    type: http
+    interval: 14400
+    format: mrs
+    behavior: domain
+    url: https://cdn.jsdelivr.net/gh/xixu-me/RFM@universal/win-spy.mrs
+    path: ./rulesets/win-spy.mrs
+  bilibili:
+    type: http
+    interval: 14400
+    format: mrs
+    behavior: domain
+    url: https://cdn.jsdelivr.net/gh/xixu-me/RFM@universal/bilibili.mrs
+    path: ./rulesets/bilibili.mrs
+  netflix:
+    type: http
+    interval: 14400
+    format: mrs
+    behavior: domain
+    url: https://cdn.jsdelivr.net/gh/xixu-me/RFM@universal/netflix.mrs
+    path: ./rulesets/netflix.mrs
+  youtube:
+    type: http
+    interval: 14400
+    format: mrs
+    behavior: domain
+    url: https://cdn.jsdelivr.net/gh/xixu-me/RFM@universal/youtube.mrs
+    path: ./rulesets/youtube.mrs
+  anthropic:
+    type: http
+    interval: 14400
+    format: mrs
+    behavior: domain
+    url: https://cdn.jsdelivr.net/gh/xixu-me/RFM@universal/anthropic.mrs
+    path: ./rulesets/anthropic.mrs
+  gemini:
+    type: http
+    interval: 14400
+    format: mrs
+    behavior: domain
+    url: https://cdn.jsdelivr.net/gh/xixu-me/RFM@universal/google-gemini.mrs
+    path: ./rulesets/gemini.mrs
+  openai:
+    type: http
+    interval: 14400
+    format: mrs
+    behavior: domain
+    url: https://cdn.jsdelivr.net/gh/xixu-me/RFM@universal/openai.mrs
+    path: ./rulesets/openai.mrs
+  douyin:
+    type: http
+    interval: 14400
+    format: mrs
+    behavior: domain
+    url: https://cdn.jsdelivr.net/gh/xixu-me/RFM@universal/douyin.mrs
+    path: ./rulesets/douyin.mrs
+  rednote:
+    type: http
+    interval: 14400
+    format: mrs
+    behavior: domain
+    url: https://cdn.jsdelivr.net/gh/xixu-me/RFM@universal/xiaohongshu.mrs
+    path: ./rulesets/rednote.mrs
+  telegram:
+    type: http
+    interval: 14400
+    format: mrs
+    behavior: domain
+    url: https://cdn.jsdelivr.net/gh/xixu-me/RFM@universal/telegram.mrs
+    path: ./rulesets/telegram.mrs
+  truthsocial:
+    type: http
+    interval: 14400
+    format: mrs
+    behavior: domain
+    url: https://cdn.jsdelivr.net/gh/xixu-me/RFM@universal/truthsocial.mrs
+    path: ./rulesets/truthsocial.mrs
+  x:
+    type: http
+    interval: 14400
+    format: mrs
+    behavior: domain
+    url: https://cdn.jsdelivr.net/gh/xixu-me/RFM@universal/x.mrs
+    path: ./rulesets/x.mrs
+  binance:
+    type: http
+    interval: 14400
+    format: mrs
+    behavior: domain
+    url: https://cdn.jsdelivr.net/gh/xixu-me/RFM@universal/binance.mrs
+    path: ./rulesets/binance.mrs
+  bybit:
+    type: http
+    interval: 14400
+    format: mrs
+    behavior: domain
+    url: https://cdn.jsdelivr.net/gh/xixu-me/RFM@universal/bybit.mrs
+    path: ./rulesets/bybit.mrs
+  okx:
+    type: http
+    interval: 14400
+    format: mrs
+    behavior: domain
+    url: https://cdn.jsdelivr.net/gh/xixu-me/RFM@universal/okx.mrs
+    path: ./rulesets/okx.mrs
+  apple:
+    type: http
+    interval: 14400
+    format: mrs
+    behavior: domain
+    url: https://cdn.jsdelivr.net/gh/xixu-me/RFM@universal/apple.mrs
+    path: ./rulesets/apple.mrs
+  google:
+    type: http
+    interval: 14400
+    format: mrs
+    behavior: domain
+    url: https://cdn.jsdelivr.net/gh/xixu-me/RFM@universal/google.mrs
+    path: ./rulesets/google.mrs
+  microsoft:
+    type: http
+    interval: 14400
+    format: mrs
+    behavior: domain
+    url: https://cdn.jsdelivr.net/gh/xixu-me/RFM@universal/microsoft.mrs
+    path: ./rulesets/microsoft.mrs
+  speedtest:
+    type: http
+    interval: 14400
+    format: mrs
+    behavior: domain
+    url: https://cdn.jsdelivr.net/gh/xixu-me/RFM@universal/speedtest.mrs
+    path: ./rulesets/speedtest.mrs
+  xget:
+    type: http
+    interval: 14400
+    format: mrs
+    behavior: domain
+    url: https://cdn.jsdelivr.net/gh/xixu-me/RFM@universal/xget.mrs
+    path: ./rulesets/xget.mrs
+  cloudflare:
+    type: http
+    interval: 14400
+    format: mrs
+    behavior: domain
+    url: https://cdn.jsdelivr.net/gh/xixu-me/RFM@universal/cloudflare.mrs
+    path: ./rulesets/cloudflare.mrs
