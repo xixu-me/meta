@@ -16,6 +16,7 @@ const services = [
   { name: "Anthropic", tld: "com" },
   { name: "Gemini", tld: "google", alias: "Google-Gemini" },
   { name: "OpenAI", tld: "com" },
+  { name: "xAI", tld: "ai", sld: "x" },
 
   // Social Media & Communication
   { name: "Douyin", domain: "douyin.com", alias: "Douyin" },
