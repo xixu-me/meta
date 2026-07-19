@@ -14,6 +14,7 @@ const services = [
 
   // AI/LLM Services
   { name: "Anthropic", tld: "com" },
+  { name: "Arco", domain: "www.youware.com" },
   { name: "Gemini", tld: "google", alias: "Google-Gemini" },
   { name: "OpenAI", tld: "com" },
   { name: "xAI", tld: "ai", sld: "x" },
