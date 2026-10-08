@@ -38,6 +38,8 @@ const services = [
 
   // Technology Companies
   { name: "Apple", tld: "com" },
+  { name: "Datadog", tld: "com", sld: "datadoghq" },
+  { name: "Figma", tld: "com" },
   { name: "Google", tld: "google", sld: "about" },
   { name: "Microsoft", tld: "com" },
 
