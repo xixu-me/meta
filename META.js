@@ -181,8 +181,8 @@ const locations = [
   {
     name: "Global 🌐",
     icon: "https://img.icons8.com/?size=144&id=3685&format=png&color=7bbbe9",
-    keywords: ["Global", "Cloudflare"],
-    codes: ["GL", "CF"],
+    keywords: ["Global", "Cloudflare", "CF", "优选"],
+    codes: ["GL"],
     emoji: ["🌐"],
   },
 ];
